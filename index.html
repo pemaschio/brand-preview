@@ -3,580 +3,2229 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brand Preview — Agom · Mondo · Orobo</title>
+<title>Mondo — Automações inteligentes que geram resultado</title>
+<meta name="description" content="Mondo constrói automações inteligentes e soluções de IA sob medida — integramos sistemas, eliminamos trabalho manual e aceleramos operações comerciais, de marketing e atendimento.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:          #EAEAE5;
+    --bg-card:     #ffffff;
+    --ink:         #1c1917;
+    --ink-2:       #44403c;
+    --ink-3:       #78716c;
+    --ink-4:       #a8a29e;
+    --border:      #e7e5e4;
+    --border-2:    #d6d3d1;
+    --neon:        #d4af37;
+    --neon-dim:    rgba(212,175,55,0.10);
+    --neon-border: rgba(212,175,55,0.25);
+  }
 
-:root {
-  --agom-bg: #08071a;
-  --agom-mid: #110d2e;
-  --agom-lime: #c8ff00;
-  --agom-violet: #7c3aed;
-  --agom-white: #eeeef8;
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
 
-  --mondo-bg: #04040a;
-  --mondo-mid: #0c0e18;
-  --mondo-gold: #d4af37;
-  --mondo-gold2: #f0d060;
-  --mondo-white: #eaeae5;
+  /* ── Progress ── */
+  #progress {
+    position: fixed; top: 0; left: 0;
+    height: 2px; width: 0%;
+    background: var(--neon);
+    box-shadow: 0 0 8px var(--neon);
+    z-index: 1000;
+    transition: width 0.1s linear;
+  }
 
-  --orobo-bg: #060f08;
-  --orobo-mid: #0d1f10;
-  --orobo-gold: #c8a020;
-  --orobo-amber: #f0c040;
-  --orobo-green: #2d5a35;
-  --orobo-white: #f5ecd0;
-}
+  /* ── Nav ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100; height: 56px; padding: 0 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(28,25,23,0.95);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-brand { display: flex; align-items: center; gap: 12px; }
+  .nav-af { width: 28px; height: 28px; flex-shrink: 0; }
+  .nav-wordmark {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.38);
+    padding-left: 12px;
+    border-left: 1px solid rgba(255,255,255,0.1);
+  }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.38); transition: color 0.2s;
+  }
+  .nav-links a:hover { color: #fff; }
+  .nav-cta {
+    display: flex !important; align-items: center; gap: 6px;
+    padding: 6px 16px;
+    background: var(--neon-dim);
+    border: 1px solid var(--neon-border);
+    border-radius: 999px;
+    font-size: 11px !important; font-weight: 600 !important;
+    color: var(--neon) !important; letter-spacing: 0.06em;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .nav-cta:hover { background: rgba(212,175,55,0.2) !important; border-color: rgba(212,175,55,0.5) !important; }
+  .nav-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--neon); box-shadow: 0 0 6px var(--neon);
+    animation: blink 2s ease-in-out infinite; flex-shrink: 0;
+  }
+  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.2; } }
 
-body {
-  font-family: 'Inter', sans-serif;
-  background: #02020a;
-  color: white;
-  overflow-x: hidden;
-}
+  /* ── Hero ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 120px 80px 80px;
+    position: relative; overflow: hidden;
+    background: var(--ink);
+  }
+  /* subtle fade at hero bottom — merges into marquee strip */
+  .hero::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
+    background: linear-gradient(to bottom, transparent, rgba(28,25,23,0.55));
+    pointer-events: none; z-index: 3;
+  }
 
-/* ─── COVER ─── */
-.cover {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #02020a;
-  text-align: center;
-  padding: 60px 24px;
-  position: relative;
-  overflow: hidden;
-}
-.cover::before {
-  content:'';
-  position:absolute;
-  width:600px;height:600px;
-  border-radius:50%;
-  background: radial-gradient(circle, rgba(100,60,200,0.12) 0%, transparent 70%);
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  pointer-events:none;
-}
-.cover-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
-  margin-bottom: 32px;
-}
-.cover-title {
-  font-size: clamp(36px, 6vw, 72px);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-  color: white;
-  margin-bottom: 20px;
-}
-.cover-subtitle {
-  font-size: 16px;
-  font-weight: 400;
-  color: rgba(255,255,255,0.45);
-  max-width: 480px;
-  line-height: 1.6;
-  margin-bottom: 64px;
-}
-.cover-names {
-  display: flex;
-  gap: 48px;
-  align-items: center;
-}
-.cover-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: rgba(255,255,255,0.2);
-}
-.cn {
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-}
-.cn-agom { color: #c8ff00; }
-.cn-mondo { color: #d4af37; }
-.cn-orobo { color: #c8a020; }
+  /* ── Marquee Strip ── */
+  .marquee-strip {
+    background: #1c1917;
+    border-top: 1px solid rgba(212,175,55,0.18);
+    border-bottom: 1px solid rgba(212,175,55,0.18);
+    height: 44px;
+    display: flex; align-items: center;
+    overflow: hidden;
+    position: relative; z-index: 10;
+  }
+  .marquee-strip::before,
+  .marquee-strip::after {
+    content: '';
+    position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2;
+    pointer-events: none;
+  }
+  .marquee-strip::before {
+    left: 0;
+    background: linear-gradient(to right, #1c1917, transparent);
+  }
+  .marquee-strip::after {
+    right: 0;
+    background: linear-gradient(to left, #1c1917, transparent);
+  }
+  .marquee-track {
+    display: flex; align-items: center; gap: 0;
+    white-space: nowrap;
+    animation: marquee-scroll 28s linear infinite;
+    will-change: transform;
+  }
+  .marquee-item {
+    display: inline-flex; align-items: center; gap: 20px;
+    padding: 0 20px;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; color: rgba(255,255,255,0.28);
+  }
+  .marquee-dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--neon);
+    box-shadow: 0 0 6px var(--neon);
+    flex-shrink: 0;
+  }
+  .marquee-item.neon-text { color: var(--neon); }
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(212,175,55,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,175,55,0.035) 1px, transparent 1px);
+    background-size: 48px 48px; z-index: 1;
+  }
+  .hero-scan {
+    position: absolute; top: -2%; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(212,175,55,0.45), transparent);
+    z-index: 2; animation: scan 7s linear infinite;
+  }
+  @keyframes scan { 0% { top:-2%; } 100% { top:102%; } }
+  .hero-glow {
+    position: absolute; top:-10%; right:-5%; width:600px; height:600px;
+    background: radial-gradient(circle, rgba(212,175,55,0.065) 0%, transparent 65%);
+    z-index: 2; animation: pulse 9s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity:.5; transform:scale(1); } 50% { opacity:1; transform:scale(1.1); } }
+  .hero-vignette {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 50%;
+    background: linear-gradient(to top, var(--ink) 0%, transparent 100%);
+    z-index: 2;
+  }
+  .hero-content { position: relative; z-index: 3; max-width: 860px; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--neon);
+    margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.2s;
+  }
+  .hero-eyebrow::before { content:''; width:24px; height:1px; background:var(--neon); flex-shrink:0; }
+  .hero h1 {
+    font-size: clamp(40px, 6.5vw, 82px);
+    font-weight: 800; letter-spacing: -0.04em; line-height: 1.0;
+    color: #fff; margin-bottom: 24px;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.35s;
+  }
+  .hero h1 em { font-style:normal; color:var(--neon); text-shadow: 0 0 40px rgba(212,175,55,0.3); }
+  .hero-sub {
+    font-size: 16px; color: rgba(255,255,255,0.42);
+    max-width: 540px; line-height: 1.8; margin-bottom: 40px;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.5s;
+  }
+  .hero-actions {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.62s;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px; background: var(--neon);
+    color: var(--ink); font-size: 13px; font-weight: 700;
+    letter-spacing: 0.02em; border: none; border-radius: 6px;
+    cursor: pointer; white-space: nowrap;
+    transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { box-shadow: 0 0 28px rgba(212,175,55,0.4); transform: translateY(-1px); }
+  .btn-ghost {
+    display: inline-flex; align-items: center;
+    font-size: 13px; font-weight: 500;
+    color: rgba(255,255,255,0.38); gap: 6px;
+    transition: color 0.2s; background: none; border: none;
+    cursor: pointer; white-space: nowrap;
+  }
+  .btn-ghost:hover { color: #fff; }
+  .hero-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; margin-top: 60px;
+    background: rgba(255,255,255,0.07);
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.75s;
+  }
+  .hero-stat {
+    padding: 22px 20px;
+    background: rgba(28,25,23,0.5); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.25s, border-color 0.25s;
+  }
+  .hero-stat:hover { background: rgba(212,175,55,0.05); border-color: var(--neon-border); }
+  .stat-label { font-size: 9px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 10px; }
+  .stat-val { font-size: 24px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: #fff; }
+  .stat-val.neon { color: var(--neon); text-shadow: 0 0 20px rgba(212,175,55,0.45); }
+  .stat-desc { font-size: 10px; color: rgba(255,255,255,0.2); margin-top: 6px; line-height: 1.5; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
 
-/* ─── SECTION BASE ─── */
-.brand-section {
-  min-height: 100vh;
-  padding: 100px 60px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-}
-@media (max-width: 900px) {
-  .brand-section { grid-template-columns: 1fr; padding: 60px 24px; }
-}
-.section-divider {
-  height: 1px;
-  background: rgba(255,255,255,0.06);
-}
+  /* ── Particles (dark sections) ── */
+  .particle-field {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden;
+  }
+  .particle {
+    position: absolute; bottom: -10px;
+    width: 2px; height: 2px; border-radius: 50%;
+    background: var(--neon); opacity: 0;
+    animation: floatUp var(--dur,10s) linear var(--del,0s) infinite;
+  }
+  @keyframes floatUp {
+    0%   { opacity: 0; transform: translateY(0) scale(1); }
+    8%   { opacity: 0.5; }
+    80%  { opacity: 0.15; }
+    100% { opacity: 0; transform: translateY(-100vh) scale(0.3); }
+  }
 
-/* ─── LEFT PANEL ─── */
-.brand-left {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-  position: relative;
-  z-index: 2;
-}
-.brand-number {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.25);
-}
-.brand-mark {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.brand-symbol {
-  width: 80px; height: 80px;
-}
-.brand-name {
-  font-size: clamp(56px, 8vw, 100px);
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  line-height: 0.9;
-}
-.brand-tagline {
-  font-size: clamp(18px, 2.5vw, 26px);
-  font-weight: 300;
-  line-height: 1.4;
-  max-width: 480px;
-}
-.brand-archetype {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.brand-archetype-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
-}
-.brand-archetype-name {
-  font-size: 20px;
-  font-weight: 700;
-}
+  /* ── Tag pill (on light bg) ── */
+  .tag {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 4px 11px 4px 9px;
+    background: var(--ink); color: rgba(255,255,255,0.85);
+    border-radius: 999px;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 14px;
+    flex-shrink: 0;
+  }
+  .tag::before {
+    content: ''; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--neon); box-shadow: 0 0 5px var(--neon);
+    flex-shrink: 0;
+  }
 
-/* ─── RIGHT PANEL ─── */
-.brand-right {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-  position: relative;
-  z-index: 2;
-}
+  /* ── Section base ── */
+  .section {
+    padding: 96px 80px; border-bottom: 1px solid var(--border-2);
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .section.visible { opacity:1; transform:translateY(0); }
+  .section-inner { max-width: 1000px; margin: 0 auto; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--ink-4); margin-bottom: 16px;
+  }
+  .section-label::before { content:''; width:16px; height:1px; background:var(--ink-4); flex-shrink:0; }
+  .section-title {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800; letter-spacing: -0.03em; color: var(--ink);
+    line-height: 1.08; margin-bottom: 20px;
+  }
+  .section-title em { font-style:normal; color: var(--ink-3); }
+  .section-lead { font-size: 15px; color: var(--ink-3); line-height: 1.85; max-width: 640px; margin-bottom: 52px; }
 
-/* Palette */
-.palette-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
-  margin-bottom: 16px;
-}
-.palette-swatches {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.swatch {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.swatch-color {
-  width: 64px; height: 64px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-.swatch-name {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  color: rgba(255,255,255,0.4);
-  text-align: center;
-}
+  /* ── Dark section ── */
+  .section-dark {
+    padding: 96px 80px;
+    background: var(--ink);
+    position: relative; overflow: hidden;
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .section-dark.visible { opacity:1; transform:translateY(0); }
+  .section-dark .section-inner { max-width: 1000px; margin: 0 auto; position: relative; z-index: 2; }
+  .section-dark .section-label { color: rgba(255,255,255,0.25); }
+  .section-dark .section-label::before { background: rgba(255,255,255,0.25); }
+  .section-dark .section-title { color: #fff; }
+  .section-dark .section-title em { color: var(--neon); text-shadow: 0 0 30px rgba(212,175,55,0.25); }
+  .section-dark .section-lead { color: rgba(255,255,255,0.38); }
+  .section-dark-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(212,175,55,0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,175,55,0.022) 1px, transparent 1px);
+    background-size: 48px 48px; pointer-events: none;
+  }
 
-/* Keywords */
-.keywords {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.keyword {
-  padding: 6px 14px;
-  border-radius: 100px;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  border: 1px solid rgba(255,255,255,0.12);
-  color: rgba(255,255,255,0.6);
-}
+  /* ── Highlight block ── */
+  .highlight {
+    padding: 24px 28px;
+    border-left: 2px solid var(--neon);
+    background: linear-gradient(to right, rgba(212,175,55,0.06), transparent);
+    margin: 32px 0 48px;
+    font-size: 15px; font-weight: 500; color: var(--ink-2); line-height: 1.75;
+    letter-spacing: -0.01em;
+  }
 
-/* Brand story */
-.brand-story {
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.7;
-  color: rgba(255,255,255,0.5);
-  max-width: 420px;
-}
+  /* ── Method Steps (section 01) — Liquid Glass ── */
+  @property --spin-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+  @keyframes spin-border { to { --spin-angle: 360deg; } }
 
-/* Typography specimen */
-.type-specimen {
-  padding: 24px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-.type-specimen-label {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.25);
-  margin-bottom: 12px;
-}
-.type-specimen-display {
-  font-size: 32px;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-}
-.type-specimen-body {
-  font-size: 13px;
-  font-weight: 400;
-  color: rgba(255,255,255,0.4);
-  margin-top: 10px;
-  line-height: 1.6;
-}
+  /* CSS Houdini @property for animated specular highlight position */
+  @property --shim-x { syntax: '<percentage>'; inherits: false; initial-value: 22%; }
+  @property --shim-y { syntax: '<percentage>'; inherits: false; initial-value: 20%; }
 
-/* ══════════════════════════════════════
-   AGOM
-══════════════════════════════════════ */
-.section-agom {
-  background: var(--agom-bg);
-}
-.section-agom::before {
-  content: '';
-  position: absolute;
-  width: 700px; height: 700px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 65%);
-  top: -100px; right: -200px;
-  pointer-events: none;
-}
-.section-agom::after {
-  content: '';
-  position: absolute;
-  width: 400px; height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(200,255,0,0.08) 0%, transparent 65%);
-  bottom: 0; left: -100px;
-  pointer-events: none;
-}
-.section-agom .brand-name { color: var(--agom-lime); }
-.section-agom .brand-tagline { color: rgba(238,238,248,0.7); }
-.section-agom .brand-archetype-name { color: var(--agom-lime); }
-.section-agom .keyword { border-color: rgba(200,255,0,0.2); color: rgba(200,255,0,0.7); }
-.section-agom .type-specimen { background: rgba(200,255,0,0.04); border-color: rgba(200,255,0,0.12); }
-.section-agom .type-specimen-display { color: var(--agom-lime); }
+  @keyframes glass-shim {
+    0%,100% { --shim-x: 22%; --shim-y: 20%; }
+    25%     { --shim-x: 28%; --shim-y: 15%; }
+    50%     { --shim-x: 18%; --shim-y: 25%; }
+    75%     { --shim-x: 30%; --shim-y: 18%; }
+  }
+  @keyframes glass-breathe {
+    0%, 100% { box-shadow: 0 12px 40px rgba(0,0,0,0.14), 0 0 0 rgba(212,175,55,0), inset 0 2px 0 rgba(255,255,255,0.8); }
+    50%       { box-shadow: 0 12px 48px rgba(0,0,0,0.18), 0 0 32px rgba(212,175,55,0.26), inset 0 2px 0 rgba(255,255,255,0.95); }
+  }
+  @keyframes glass-breathe-dark {
+    0%, 100% { box-shadow: 0 12px 36px rgba(0,0,0,0.38), 0 0 0 rgba(212,175,55,0), inset 0 1.5px 0 rgba(212,175,55,0.65), 0 0 0 1px rgba(212,175,55,0.30); }
+    50%       { box-shadow: 0 12px 44px rgba(0,0,0,0.42), 0 0 44px rgba(212,175,55,0.44), inset 0 1.5px 0 rgba(212,175,55,0.80), 0 0 0 1px rgba(212,175,55,0.44); }
+  }
+  @keyframes stream-travel {
+    0%   { left: -8px; opacity: 0; }
+    6%   { opacity: var(--sop, 1); }
+    94%  { opacity: var(--sop, 1); }
+    100% { left: calc(100% + 8px); opacity: 0; }
+  }
+  @keyframes fill-line {
+    from { width: 0; } to { width: 100%; }
+  }
+  @keyframes ghost-in {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+  }
 
-/* ══════════════════════════════════════
-   MONDO
-══════════════════════════════════════ */
-.section-mondo {
-  background: var(--mondo-bg);
-}
-.section-mondo::before {
-  content: '';
-  position: absolute;
-  width: 800px; height: 800px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 65%);
-  top: 50%; right: -300px;
-  transform: translateY(-50%);
-  pointer-events: none;
-}
-.section-mondo .brand-name { color: var(--mondo-gold); }
-.section-mondo .brand-tagline { color: rgba(234,234,229,0.7); }
-.section-mondo .brand-archetype-name { color: var(--mondo-gold); }
-.section-mondo .keyword { border-color: rgba(212,175,55,0.2); color: rgba(212,175,55,0.7); }
-.section-mondo .type-specimen { background: rgba(212,175,55,0.04); border-color: rgba(212,175,55,0.12); }
-.section-mondo .type-specimen-display { color: var(--mondo-gold); }
+  /* Section 01 — dark warm charcoal, ideal for glass + neon */
+  #diferenca {
+    position: relative;
+    overflow: hidden;
+    background-color: #2E2B28;
+    background-image:
+      /* bottom: neon builds toward section 02 */
+      linear-gradient(to top,
+        rgba(212,175,55,0.10) 0%,
+        rgba(212,175,55,0.03) 22%,
+        rgba(212,175,55,0) 40%),
+      /* dot grid texture */
+      radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+    background-size: auto, 24px 24px;
+  }
+  /* neon bloom — upper-right, subtil (transição começa escura) */
+  #diferenca::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle,
+      rgba(212,175,55,0.20) 0%,
+      rgba(212,175,55,0.08) 35%,
+      transparent 65%);
+    border-radius: 50%;
+    top: -80px; right: -150px;
+    pointer-events: none;
+  }
+  /* dark depth — center-left */
+  #diferenca::after {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0,0,0,0.30) 0%, transparent 65%);
+    border-radius: 50%;
+    top: 50%; left: -80px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  /* neon bloom principal — baixo-direita, intenso, "respira" para a próxima seção */
+  .diferenca-glow2 {
+    position: absolute;
+    width: 560px; height: 560px;
+    background: radial-gradient(circle,
+      rgba(212,175,55,0.22) 0%,
+      rgba(212,175,55,0.10) 35%,
+      transparent 65%);
+    border-radius: 50%;
+    bottom: -160px; right: 0%;
+    pointer-events: none;
+  }
 
-/* ══════════════════════════════════════
-   OROBO
-══════════════════════════════════════ */
-.section-orobo {
-  background: var(--orobo-bg);
-}
-.section-orobo::before {
-  content: '';
-  position: absolute;
-  width: 600px; height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(45,90,53,0.4) 0%, transparent 65%);
-  top: -50px; left: -150px;
-  pointer-events: none;
-}
-.section-orobo::after {
-  content: '';
-  position: absolute;
-  width: 500px; height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(200,160,32,0.1) 0%, transparent 65%);
-  bottom: 0; right: -100px;
-  pointer-events: none;
-}
-.section-orobo .brand-name { color: var(--orobo-gold); }
-.section-orobo .brand-tagline { color: rgba(245,236,208,0.7); }
-.section-orobo .brand-archetype-name { color: var(--orobo-gold); }
-.section-orobo .keyword { border-color: rgba(200,160,32,0.2); color: rgba(200,160,32,0.7); }
-.section-orobo .type-specimen { background: rgba(200,160,32,0.04); border-color: rgba(200,160,32,0.12); }
-.section-orobo .type-specimen-display { color: var(--orobo-gold); }
+  /* ── Section 01 dark-bg text overrides ── */
+  #diferenca .section-label { color: rgba(255,255,255,0.25); }
+  #diferenca .section-label::before { background: rgba(255,255,255,0.25); }
+  #diferenca .section-title { color: #fff; }
+  #diferenca .section-title em { color: var(--neon); text-shadow: 0 0 30px rgba(212,175,55,0.30); }
+  #diferenca .section-lead { color: rgba(255,255,255,0.42); }
 
-/* ─── FOOTER ─── */
-.footer {
-  background: #02020a;
-  padding: 60px;
-  text-align: center;
-  border-top: 1px solid rgba(255,255,255,0.06);
-}
-.footer p {
-  font-size: 12px;
-  color: rgba(255,255,255,0.2);
-  letter-spacing: 0.1em;
-}
+  #diferenca .method-step-num { color: rgba(255,255,255,0.28); }
+  #diferenca .method-step:hover .method-step-num { color: var(--neon); }
+  #diferenca .method-step-label { color: rgba(255,255,255,0.92); }
+  #diferenca .method-step-line { color: rgba(255,255,255,0.42); }
+
+  /* ghost numbers — white with neon glow on dark bg */
+  #diferenca .method-step::before { color: rgba(255,255,255,0.85); }
+
+  /* connector on dark */
+  #diferenca .method-connector { background: rgba(255,255,255,0.09); }
+  #diferenca .method-connector::after { border-color: rgba(255,255,255,0.18); }
+  #diferenca .method-steps.has-hover .method-connector:not(.conn-active) { background: rgba(255,255,255,0.04); }
+
+  /* ── Section 01 glass icons — recalibrated for dark bg ── */
+  #diferenca .method-step-icon {
+    color: rgba(255,255,255,0.72);
+    backdrop-filter: blur(14px) saturate(200%) brightness(1.38) contrast(1.04);
+    -webkit-backdrop-filter: blur(14px) saturate(200%) brightness(1.38) contrast(1.04);
+    background:
+      radial-gradient(ellipse 60% 46% at var(--shim-x) var(--shim-y),
+        rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.08) 30%, rgba(255,255,255,0) 52%) no-repeat,
+      radial-gradient(ellipse 70% 55% at 90% 5%,
+        rgba(212,175,55,0.34) 0%, rgba(212,175,55,0.06) 45%, transparent 60%) no-repeat,
+      linear-gradient(168deg,
+        rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 45%,
+        rgba(255,255,255,0.02) 75%, rgba(0,0,0,0.05) 100%);
+    border-top-color: rgba(255,255,255,0.55);
+    border-left-color: rgba(255,255,255,0.30);
+    border-right-color: rgba(255,255,255,0.07);
+    border-bottom-color: rgba(255,255,255,0.05);
+    box-shadow:
+      0 8px 28px rgba(0,0,0,0.40), 0 3px 8px rgba(0,0,0,0.24),
+      inset 0 1.5px 0 rgba(255,255,255,0.50), inset 1px 0 0 rgba(255,255,255,0.26),
+      inset 0 -1.5px 0 rgba(0,0,0,0.18),
+      0 0 0 0.5px rgba(255,255,255,0.14), 0 0 28px rgba(212,175,55,0.14);
+  }
+  #diferenca .method-step:hover .method-step-icon {
+    color: rgba(255,255,255,0.90);
+    border-top-color: rgba(212,175,55,0.85);
+    border-left-color: rgba(212,175,55,0.50);
+    border-right-color: rgba(212,175,55,0.12);
+    border-bottom-color: rgba(212,175,55,0.08);
+    transform: translateY(-5px) scale(1.08);
+    background:
+      radial-gradient(ellipse 60% 46% at var(--shim-x) var(--shim-y),
+        rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.14) 30%, rgba(255,255,255,0) 52%) no-repeat,
+      radial-gradient(ellipse 70% 55% at 90% 5%,
+        rgba(212,175,55,0.58) 0%, rgba(212,175,55,0.10) 45%, transparent 60%) no-repeat,
+      linear-gradient(168deg,
+        rgba(212,175,55,0.24) 0%, rgba(212,175,55,0.08) 42%,
+        rgba(212,175,55,0.04) 70%, rgba(0,0,0,0.04) 100%);
+    box-shadow:
+      0 12px 36px rgba(0,0,0,0.38), 0 4px 10px rgba(0,0,0,0.22),
+      inset 0 1.5px 0 rgba(212,175,55,0.72), inset 1px 0 0 rgba(212,175,55,0.40),
+      inset 0 -1.5px 0 rgba(0,0,0,0.12),
+      0 0 0 1px rgba(212,175,55,0.38), 0 0 44px rgba(212,175,55,0.40);
+    animation: glass-breathe-dark 2.2s ease-in-out infinite;
+  }
+  #diferenca .method-step:hover .method-step-icon::before {
+    background: linear-gradient(155deg,
+      rgba(255,255,255,0.45) 0%, rgba(212,175,55,0.14) 35%,
+      rgba(212,175,55,0.04) 58%, rgba(0,0,0,0.05) 100%);
+  }
+
+  .method-steps {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr 80px 1fr;
+    align-items: start;
+    margin-top: 64px;
+    position: relative;
+  }
+
+  /* ── Connector ── */
+  .method-connector {
+    height: 2px;
+    margin-top: 39px; /* center on 80px icon */
+    background: rgba(28,25,23,0.09);
+    position: relative;
+    overflow: visible;
+    transition: background 0.35s;
+  }
+  .method-connector .conn-fill {
+    position: absolute;
+    top: 0; left: 0; height: 100%;
+    width: 0;
+    background: linear-gradient(to right, rgba(212,175,55,0.5), var(--neon));
+    box-shadow: 0 0 8px rgba(212,175,55,0.6), 0 0 2px rgba(212,175,55,1);
+    transition: width 1.1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .method-connector.drawn .conn-fill { width: 100%; }
+  /* arrowhead at end */
+  .method-connector::after {
+    content: '';
+    position: absolute;
+    top: -4px; right: -6px;
+    width: 0; height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 8px solid var(--neon);
+    filter: drop-shadow(0 0 4px var(--neon));
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: opacity 0.4s 0.9s, transform 0.4s 0.9s;
+  }
+  .method-connector.drawn::after { opacity: 1; transform: scaleX(1); }
+  /* stream dots — created by JS */
+  .stream-dot {
+    position: absolute;
+    top: calc(50% - var(--sz, 6px)/2);
+    left: -8px;
+    width: var(--sz, 6px); height: var(--sz, 6px);
+    border-radius: 50%;
+    background: var(--neon);
+    box-shadow: 0 0 8px var(--neon), 0 0 16px rgba(212,175,55,0.5);
+    opacity: 0;
+    animation: stream-travel var(--dur, 2.4s) ease-in-out infinite;
+    animation-delay: var(--d, 0s);
+  }
+  /* hover: connector dims when step not adjacent */
+  .method-steps.has-hover .method-connector:not(.conn-active) { background: rgba(28,25,23,0.04); }
+  .method-steps.has-hover .method-connector.conn-active .conn-fill {
+    box-shadow: 0 0 14px rgba(212,175,55,0.8), 0 0 4px rgba(212,175,55,1);
+  }
+
+  /* ── Steps ── */
+  .method-step {
+    padding: 0 4px 0 0;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+  }
+  .method-step.visible { opacity: 1; transform: translateY(0); }
+
+  /* ghost number — centered behind the icon, neon glow */
+  .method-step::before {
+    content: attr(data-num);
+    position: absolute;
+    left: 50%; top: -22px;
+    transform: translateX(-50%);
+    font-size: 120px; font-weight: 900;
+    color: var(--ink);
+    opacity: 0; letter-spacing: -0.06em; line-height: 1;
+    pointer-events: none; user-select: none;
+    transition: opacity 0.5s;
+    white-space: nowrap;
+    text-shadow: 0 0 60px rgba(212,175,55,0.5), 0 0 120px rgba(212,175,55,0.2);
+  }
+  .method-step.visible::before { opacity: 0.10; }
+  .method-step.step-active::before { opacity: 0.18; }
+
+  /* SVG draw-on animation */
+  .method-step-icon svg * {
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+    transition: stroke-dashoffset 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .method-step.visible .method-step-icon svg * { stroke-dashoffset: 0; }
+  .method-step:nth-child(1).visible .method-step-icon svg * { transition-delay: 0.1s; }
+  .method-step:nth-child(3).visible .method-step-icon svg * { transition-delay: 0.3s; }
+  .method-step:nth-child(5).visible .method-step-icon svg * { transition-delay: 0.5s; }
+
+  /* ── Apple Liquid Glass — pure CSS crystal approach ── */
+  .method-step-icon {
+    width: 80px; height: 80px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 22px;
+    position: relative; overflow: hidden; isolation: isolate;
+    color: rgba(28,25,23,0.72);
+    margin-bottom: 28px;
+    cursor: default;
+
+    /* Real backdrop blur — shows background with amplified saturation.
+       Low base opacity + high saturation = background colors bleed into glass
+       giving it a "warm crystal" feel (stone-warm tint + neon tint from bloom) */
+    backdrop-filter: blur(12px) saturate(220%) brightness(1.06) contrast(1.02);
+    -webkit-backdrop-filter: blur(12px) saturate(220%) brightness(1.06) contrast(1.02);
+
+    /* Glass surface layers (painted on top of the blurred background):
+       1. Animated specular hot-spot — main light reflection
+       2. Neon tint — top-right simulates reflecting the neon bloom
+       3. Glass body — very low opacity (glass = mostly transparent)
+       4. Bottom gradient darkening — depth/thickness illusion */
+    background:
+      /* Animated bright specular — moves gently (CSS Houdini) */
+      radial-gradient(ellipse 60% 46% at var(--shim-x) var(--shim-y),
+        rgba(255,255,255,0.94) 0%,
+        rgba(255,255,255,0.22) 30%,
+        rgba(255,255,255,0) 52%) no-repeat,
+      /* Neon reflection from top-right (matches bloom position) */
+      radial-gradient(ellipse 70% 55% at 90% 5%,
+        rgba(212,175,55,0.26) 0%,
+        rgba(212,175,55,0.04) 45%,
+        transparent 60%) no-repeat,
+      /* Glass body: near-transparent lets backdrop show through */
+      linear-gradient(168deg,
+        rgba(255,255,255,0.28) 0%,
+        rgba(255,255,255,0.12) 45%,
+        rgba(255,255,255,0.04) 75%,
+        rgba(0,0,0,0.03) 100%);
+    animation: glass-shim 8s ease-in-out infinite;
+
+    /* Glass borders — asymmetric like real glass catching overhead light:
+       top & left bright (light source), bottom & right dim */
+    border-top: 1px solid rgba(255,255,255,0.88);
+    border-left: 1px solid rgba(255,255,255,0.54);
+    border-right: 1px solid rgba(255,255,255,0.14);
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+
+    /* Layered shadow for dimensional depth */
+    box-shadow:
+      /* Outer drop shadow — element floats above surface */
+      0 14px 44px rgba(0,0,0,0.17),
+      0 5px 12px rgba(0,0,0,0.11),
+      0 1px 3px rgba(0,0,0,0.08),
+      /* Inset top rim — bright overhead light hitting the top edge */
+      inset 0 1.5px 0 rgba(255,255,255,0.80),
+      /* Inset left side light */
+      inset 1px 0 0 rgba(255,255,255,0.45),
+      /* Inset bottom shadow — thickness/depth */
+      inset 0 -1.5px 0 rgba(0,0,0,0.10),
+      inset -1px 0 0 rgba(0,0,0,0.05),
+      /* Neon ambient: subtle green glow from environment */
+      0 0 0 0.5px rgba(255,255,255,0.30),
+      0 0 32px rgba(212,175,55,0.07);
+
+    transition:
+      border-color 0.35s, box-shadow 0.40s, color 0.35s,
+      transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+      background 0.40s;
+  }
+
+  /* Inner glass surface gradient (::before) — simulates glass thickness:
+     bright top-left face, dark bottom-right inner shadow */
+  .method-step-icon::before {
+    content: '';
+    position: absolute; inset: 0; border-radius: inherit;
+    background: linear-gradient(
+      155deg,
+      rgba(255,255,255,0.50) 0%,
+      rgba(255,255,255,0.10) 35%,
+      rgba(255,255,255,0) 58%,
+      rgba(0,0,0,0.04) 100%
+    );
+    pointer-events: none; z-index: 1;
+    transition: opacity 0.35s;
+  }
+
+  /* Dynamic specular border — JS rotates gradient on mousemove */
+  .glass-border {
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    background: linear-gradient(145deg,
+      rgba(255,255,255,0.90) 0%,
+      rgba(255,255,255,0.20) 40%,
+      rgba(255,255,255,0.45) 100%);
+    opacity: 0.60;
+    z-index: 2;
+    transition: opacity 0.3s;
+  }
+
+  /* SVG icon */
+  .method-step-icon svg { position: relative; z-index: 3; }
+
+  /* Hover: crystal activates neon mode — brightens specular, glows green */
+  .method-step:hover .method-step-icon {
+    border-top-color: rgba(212,175,55,0.88);
+    border-left-color: rgba(212,175,55,0.52);
+    border-right-color: rgba(212,175,55,0.15);
+    border-bottom-color: rgba(212,175,55,0.10);
+    color: rgba(24,32,4,0.85);
+    transform: translateY(-5px) scale(1.08);
+    background:
+      radial-gradient(ellipse 60% 46% at var(--shim-x) var(--shim-y),
+        rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.24) 30%, rgba(255,255,255,0) 52%) no-repeat,
+      radial-gradient(ellipse 70% 55% at 90% 5%,
+        rgba(212,175,55,0.52) 0%, rgba(212,175,55,0.08) 45%, transparent 60%) no-repeat,
+      linear-gradient(168deg,
+        rgba(212,175,55,0.22) 0%, rgba(212,175,55,0.08) 40%,
+        rgba(212,175,55,0.04) 70%, rgba(0,0,0,0.02) 100%);
+    box-shadow:
+      0 18px 50px rgba(0,0,0,0.17),
+      0 6px 14px rgba(0,0,0,0.10),
+      inset 0 1.5px 0 rgba(212,175,55,0.72),
+      inset 1px 0 0 rgba(212,175,55,0.42),
+      inset 0 -1.5px 0 rgba(0,0,0,0.08),
+      0 0 0 1px rgba(212,175,55,0.38),
+      0 0 42px rgba(212,175,55,0.30);
+    animation: glass-breathe 2.2s ease-in-out infinite;
+  }
+  .method-step:hover .method-step-icon::before {
+    background: linear-gradient(155deg,
+      rgba(255,255,255,0.55) 0%, rgba(212,175,55,0.12) 35%,
+      rgba(212,175,55,0.04) 58%, rgba(0,0,0,0.03) 100%);
+  }
+  .method-step:hover .glass-border { opacity: 0.90; }
+
+  /* text */
+  .method-step-num {
+    font-size: 10px; font-weight: 800; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-4); margin-bottom: 10px;
+    transition: color 0.2s;
+  }
+  .method-step:hover .method-step-num { color: var(--neon); }
+  .method-step-label {
+    font-size: 20px; font-weight: 700; color: var(--ink);
+    letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 10px;
+    transition: color 0.2s;
+  }
+  .method-step-line {
+    font-size: 13px; color: var(--ink-3); line-height: 1.6; max-width: 230px;
+    transition: color 0.2s;
+  }
+
+  /* sibling dimming on hover */
+  .method-steps.has-hover .method-step:not(.step-active) {
+    opacity: 0.32;
+    transition: opacity 0.22s ease;
+  }
+  .method-steps.has-hover .method-step.step-active { opacity: 1; }
+
+  /* ── Specialist cards (dark section) ── */
+  .spec-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: rgba(255,255,255,0.06);
+  }
+  .spec-card {
+    padding: 36px 32px; background: rgba(255,255,255,0.02);
+    position: relative; overflow: hidden;
+    border: 1px solid transparent;
+    transition: background 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    will-change: transform; cursor: default;
+  }
+  .spec-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:1px;
+    background: rgba(255,255,255,0.06); transition: background 0.25s;
+  }
+  .spec-card:hover {
+    background: rgba(212,175,55,0.04);
+    border-color: rgba(212,175,55,0.18);
+    box-shadow: 0 0 40px rgba(212,175,55,0.06);
+  }
+  .spec-card:hover::before { background: var(--neon); }
+
+  /* spec-card group dimming */
+  .spec-grid.has-hover .spec-card:not(.spec-active) {
+    opacity: 0.3;
+    transition: opacity 0.2s ease, background 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  }
+  .spec-grid.has-hover .spec-card.spec-active { opacity: 1; }
+
+  /* ── Spec-icon — Dark Glass (section 02 dark bg) ── */
+  .spec-icon {
+    width: 52px; height: 52px; margin-bottom: 24px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 14px;
+    color: var(--neon);
+    position: relative; overflow: hidden; isolation: isolate;
+    cursor: default;
+    backdrop-filter: blur(14px) saturate(200%) brightness(1.38) contrast(1.04);
+    -webkit-backdrop-filter: blur(14px) saturate(200%) brightness(1.38) contrast(1.04);
+    background:
+      radial-gradient(ellipse 62% 50% at var(--shim-x) var(--shim-y),
+        rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.08) 35%, transparent 55%) no-repeat,
+      radial-gradient(ellipse 70% 55% at 88% 8%,
+        rgba(212,175,55,0.34) 0%, rgba(212,175,55,0.06) 45%, transparent 62%) no-repeat,
+      linear-gradient(168deg,
+        rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 45%,
+        rgba(255,255,255,0.02) 75%, rgba(0,0,0,0.05) 100%);
+    animation: glass-shim 8s ease-in-out infinite;
+    border-top: 1px solid rgba(255,255,255,0.55);
+    border-left: 1px solid rgba(255,255,255,0.30);
+    border-right: 1px solid rgba(255,255,255,0.07);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    box-shadow:
+      0 8px 28px rgba(0,0,0,0.40), 0 3px 8px rgba(0,0,0,0.24),
+      inset 0 1.5px 0 rgba(255,255,255,0.50), inset 1px 0 0 rgba(255,255,255,0.26),
+      inset 0 -1.5px 0 rgba(0,0,0,0.18),
+      0 0 0 0.5px rgba(255,255,255,0.14), 0 0 28px rgba(212,175,55,0.14);
+    transition: border-color 0.35s, box-shadow 0.40s, color 0.35s,
+      transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.40s;
+  }
+  .spec-icon::before {
+    content: '';
+    position: absolute; inset: 0; border-radius: inherit;
+    background: linear-gradient(155deg,
+      rgba(255,255,255,0.38) 0%, rgba(255,255,255,0.07) 40%,
+      rgba(255,255,255,0) 60%, rgba(0,0,0,0.06) 100%);
+    pointer-events: none; z-index: 1;
+  }
+  .spec-icon::after {
+    content: '';
+    position: absolute; inset: 0; border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    background: linear-gradient(145deg,
+      rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.14) 42%, rgba(212,175,55,0.42) 100%);
+    opacity: 0.52; z-index: 2;
+    transition: opacity 0.3s;
+  }
+  .spec-icon svg { position: relative; z-index: 3; }
+  .spec-card:hover .spec-icon {
+    border-top-color: rgba(212,175,55,0.85);
+    border-left-color: rgba(212,175,55,0.50);
+    transform: scale(1.08);
+    background:
+      radial-gradient(ellipse 62% 50% at var(--shim-x) var(--shim-y),
+        rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.14) 35%, transparent 55%) no-repeat,
+      radial-gradient(ellipse 70% 55% at 88% 8%,
+        rgba(212,175,55,0.58) 0%, rgba(212,175,55,0.10) 45%, transparent 62%) no-repeat,
+      linear-gradient(168deg,
+        rgba(212,175,55,0.24) 0%, rgba(212,175,55,0.08) 42%,
+        rgba(212,175,55,0.04) 70%, rgba(0,0,0,0.04) 100%);
+    box-shadow:
+      0 12px 36px rgba(0,0,0,0.38), 0 4px 10px rgba(0,0,0,0.22),
+      inset 0 1.5px 0 rgba(212,175,55,0.72), inset 1px 0 0 rgba(212,175,55,0.40),
+      inset 0 -1.5px 0 rgba(0,0,0,0.12),
+      0 0 0 1px rgba(212,175,55,0.38), 0 0 44px rgba(212,175,55,0.40);
+    animation: glass-breathe-dark 2.2s ease-in-out infinite;
+  }
+  .spec-card:hover .spec-icon::after { opacity: 0.88; }
+  .spec-area {
+    font-size: 13px; font-weight: 700; letter-spacing: -0.01em;
+    color: #fff; margin-bottom: 6px; line-height: 1.3;
+  }
+  .spec-tagline { font-size: 12px; color: rgba(255,255,255,0.38); line-height: 1.55; }
+
+  /* ── Section 02 Soluções — background premium ── */
+  #solucoes {
+    position: relative;
+    background-image:
+      radial-gradient(ellipse 700px 520px at 90% 10%, rgba(212,175,55,0.06) 0%, transparent 65%),
+      radial-gradient(ellipse 500px 400px at 10% 85%, rgba(212,175,55,0.04) 0%, transparent 62%),
+      radial-gradient(circle, rgba(28,25,23,0.055) 1px, transparent 1px);
+    background-size: auto, auto, 24px 24px;
+  }
+
+  /* ── Solutions — Bento Grid ── */
+  .sol-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 14px;
+    background: transparent;
+  }
+
+  /* Bento positions */
+  .sol-card:nth-child(1) { grid-column: 1 / 8; }   /* SDR — wide left */
+  .sol-card:nth-child(2) { grid-column: 8 / 13; }  /* IA — right */
+  .sol-card:nth-child(3) { grid-column: 1 / 6; }   /* Portal — left */
+  .sol-card:nth-child(4) { grid-column: 6 / 13; }  /* Dashboard — wide right */
+  .sol-featured         { grid-column: 1 / 13; }   /* Automações — full */
+
+  /* Wide card extra padding */
+  .sol-card:nth-child(1),
+  .sol-card:nth-child(4) { padding: 44px 40px; }
+
+  .sol-card {
+    padding: 36px 32px;
+    background: rgba(255,255,255,0.52);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    position: relative; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.72);
+    transition: background 0.3s, transform 0.38s cubic-bezier(0.34,1.56,0.64,1),
+      box-shadow 0.3s, border-color 0.3s;
+    will-change: transform; cursor: default;
+  }
+
+  /* Neon accent top */
+  .sol-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--border-2); z-index: 1;
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+
+  /* Ghost number — bottom-right editorial */
+  .sol-card::after {
+    content: attr(data-num);
+    position: absolute; right: 16px; bottom: -14px;
+    font-size: 88px; font-weight: 900; letter-spacing: -0.05em; line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(212,175,55,0.07);
+    pointer-events: none; user-select: none;
+    transition: -webkit-text-stroke-color 0.45s;
+  }
+
+  /* Card content above ghost number */
+  .sol-card > * { position: relative; z-index: 1; }
+
+  .sol-card:hover {
+    background: rgba(255,255,255,0.72);
+    box-shadow: 0 14px 44px rgba(0,0,0,0.10), 0 4px 12px rgba(0,0,0,0.06);
+    transform: translateY(-5px);
+    border-color: rgba(212,175,55,0.30);
+  }
+  .sol-card:hover::before { background: var(--neon); box-shadow: 0 0 10px var(--neon); }
+  .sol-card:hover::after  { -webkit-text-stroke-color: rgba(212,175,55,0.18); }
+
+  /* ── Sol-icon — Light Glass (section 03) ── */
+  .sol-icon {
+    width: 44px; height: 44px; margin-bottom: 20px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 12px;
+    color: var(--ink-2);
+    position: relative; overflow: hidden; isolation: isolate;
+    cursor: default;
+    backdrop-filter: blur(10px) saturate(200%) brightness(1.04) contrast(1.01);
+    -webkit-backdrop-filter: blur(10px) saturate(200%) brightness(1.04) contrast(1.01);
+    background:
+      radial-gradient(ellipse 60% 48% at var(--shim-x) var(--shim-y),
+        rgba(255,255,255,0.90) 0%, rgba(255,255,255,0.20) 32%, transparent 52%) no-repeat,
+      linear-gradient(168deg,
+        rgba(255,255,255,0.26) 0%, rgba(255,255,255,0.10) 45%,
+        rgba(255,255,255,0.04) 75%, rgba(0,0,0,0.02) 100%);
+    animation: glass-shim 9s ease-in-out infinite;
+    border-top: 1px solid rgba(255,255,255,0.88);
+    border-left: 1px solid rgba(255,255,255,0.50);
+    border-right: 1px solid rgba(255,255,255,0.12);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    box-shadow:
+      0 6px 20px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.07),
+      inset 0 1.5px 0 rgba(255,255,255,0.78), inset 1px 0 0 rgba(255,255,255,0.42),
+      inset 0 -1.5px 0 rgba(0,0,0,0.07),
+      0 0 0 0.5px rgba(255,255,255,0.26), 0 0 18px rgba(212,175,55,0.05);
+    transition: border-color 0.35s, box-shadow 0.40s, color 0.35s,
+      transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.40s;
+  }
+  .sol-icon::before {
+    content: '';
+    position: absolute; inset: 0; border-radius: inherit;
+    background: linear-gradient(155deg,
+      rgba(255,255,255,0.48) 0%, rgba(255,255,255,0.10) 36%,
+      rgba(255,255,255,0) 58%, rgba(0,0,0,0.03) 100%);
+    pointer-events: none; z-index: 1;
+  }
+  .sol-icon svg { position: relative; z-index: 2; }
+  .sol-card:hover .sol-icon {
+    color: var(--ink);
+    transform: scale(1.10);
+    border-top-color: rgba(212,175,55,0.75);
+    border-left-color: rgba(212,175,55,0.42);
+    background:
+      radial-gradient(ellipse 60% 48% at var(--shim-x) var(--shim-y),
+        rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.24) 32%, transparent 52%) no-repeat,
+      linear-gradient(168deg,
+        rgba(212,175,55,0.20) 0%, rgba(212,175,55,0.07) 42%,
+        rgba(212,175,55,0.03) 70%, rgba(0,0,0,0.02) 100%);
+    box-shadow:
+      0 8px 28px rgba(0,0,0,0.14), 0 3px 8px rgba(0,0,0,0.08),
+      inset 0 1.5px 0 rgba(212,175,55,0.65), inset 1px 0 0 rgba(212,175,55,0.36),
+      0 0 0 1px rgba(212,175,55,0.30), 0 0 28px rgba(212,175,55,0.20);
+  }
+
+  .sol-title { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 10px; letter-spacing:-0.02em; line-height: 1.2; }
+  .sol-desc { font-size: 13px; color: var(--ink-3); line-height: 1.75; margin-bottom: 20px; }
+
+  .sol-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    padding: 4px 11px;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
+    color: var(--ink-2);
+    background: var(--bg); border: 1px solid var(--border-2);
+    border-radius: 999px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .sol-card:hover .chip { border-color: rgba(212,175,55,0.3); }
+
+  /* Featured dark solution card */
+  .sol-featured {
+    grid-column: 1 / -1;
+    padding: 48px;
+    background: var(--ink);
+    position: relative; overflow: hidden;
+    border: none; cursor: default;
+  }
+  .sol-featured::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:2px;
+    background: var(--neon); box-shadow: 0 0 12px var(--neon);
+  }
+  .sol-featured .section-dark-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(212,175,55,0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,175,55,0.018) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .sol-featured-inner {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
+  }
+  .sol-featured .sol-icon {
+    color: var(--neon);
+    border-top-color: rgba(255,255,255,0.48);
+    border-left-color: rgba(255,255,255,0.26);
+    border-right-color: rgba(255,255,255,0.06);
+    border-bottom-color: rgba(255,255,255,0.04);
+    backdrop-filter: blur(14px) saturate(200%) brightness(1.38) contrast(1.04);
+    -webkit-backdrop-filter: blur(14px) saturate(200%) brightness(1.38) contrast(1.04);
+    background:
+      radial-gradient(ellipse 60% 48% at var(--shim-x) var(--shim-y),
+        rgba(255,255,255,0.50) 0%, rgba(255,255,255,0.08) 32%, transparent 52%) no-repeat,
+      radial-gradient(ellipse 68% 52% at 88% 8%,
+        rgba(212,175,55,0.30) 0%, rgba(212,175,55,0.05) 45%, transparent 62%) no-repeat,
+      linear-gradient(168deg,
+        rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.05) 45%,
+        rgba(255,255,255,0.02) 75%, rgba(0,0,0,0.06) 100%);
+    box-shadow:
+      0 8px 28px rgba(0,0,0,0.36), 0 3px 8px rgba(0,0,0,0.22),
+      inset 0 1.5px 0 rgba(255,255,255,0.46), inset 1px 0 0 rgba(255,255,255,0.24),
+      inset 0 -1.5px 0 rgba(0,0,0,0.18),
+      0 0 0 0.5px rgba(255,255,255,0.12), 0 0 24px rgba(212,175,55,0.14);
+  }
+  .sol-featured .sol-title { color: #fff; }
+  .sol-featured .sol-desc { color: rgba(255,255,255,0.4); }
+  .sol-featured .chip {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.5);
+  }
+  .sol-feat-features { display: flex; flex-direction: column; gap: 0; }
+  .sol-feat-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .sol-feat-item:last-child { border-bottom: none; }
+  .sol-feat-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--neon); flex-shrink: 0; margin-top: 6px;
+    box-shadow: 0 0 6px var(--neon);
+  }
+  .sol-feat-text { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.55; }
+
+  /* ── Section 04 Processo — background premium ── */
+  #processo {
+    position: relative;
+    background-image:
+      radial-gradient(ellipse 640px 480px at 88% 82%, rgba(212,175,55,0.05) 0%, transparent 65%),
+      radial-gradient(ellipse 480px 360px at 10% 15%, rgba(212,175,55,0.04) 0%, transparent 62%),
+      radial-gradient(circle, rgba(28,25,23,0.055) 1px, transparent 1px);
+    background-size: auto, auto, 24px 24px;
+  }
+
+  /* ── Timeline (process) ── */
+  .timeline {
+    position: relative;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .timeline::before {
+    content: ''; position: absolute;
+    top: 47px; left: calc(12.5% + 19px); right: calc(12.5% + 19px);
+    height: 1px; background: var(--border-2); z-index: 0;
+  }
+  .timeline::after {
+    content: ''; position: absolute;
+    top: 47px; left: calc(12.5% + 19px);
+    height: 1px; width: 0%;
+    background: var(--neon);
+    box-shadow: 0 0 8px var(--neon);
+    transition: width 1.8s ease 0.4s;
+    z-index: 0;
+  }
+  .timeline.visible::after { width: calc(75% - 38px); }
+
+  .tl-step {
+    padding: 32px 24px 36px; text-align: left;
+    background: rgba(255,255,255,0.50);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255,255,255,0.70);
+    border-top: 2px solid var(--border-2);
+    position: relative; z-index: 1; cursor: default;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease,
+      background 0.3s, box-shadow 0.35s, border-color 0.35s;
+  }
+  .tl-step:nth-child(1) { transition-delay: 0s; }
+  .tl-step:nth-child(2) { transition-delay: 0.12s; }
+  .tl-step:nth-child(3) { transition-delay: 0.24s; }
+  .tl-step:nth-child(4) { transition-delay: 0.36s; }
+  .tl-step.visible {
+    opacity: 1; transform: translateY(0);
+    border-top-color: rgba(212,175,55,0.40);
+  }
+  .tl-step:hover {
+    background: rgba(255,255,255,0.72);
+    box-shadow: 0 10px 32px rgba(0,0,0,0.09), 0 3px 8px rgba(0,0,0,0.05);
+    border-top-color: rgba(212,175,55,0.75);
+  }
+
+  /* ── tl-dot — Glass circular pill (section 04) ── */
+  .tl-dot {
+    width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 800; letter-spacing: 0.06em;
+    color: var(--ink-3);
+    margin-bottom: 24px;
+    position: relative; z-index: 1; overflow: hidden; isolation: isolate;
+    cursor: default;
+    backdrop-filter: blur(10px) saturate(180%) brightness(1.04);
+    -webkit-backdrop-filter: blur(10px) saturate(180%) brightness(1.04);
+    background:
+      radial-gradient(ellipse 72% 58% at 28% 22%,
+        rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.18) 42%, transparent 60%) no-repeat,
+      linear-gradient(155deg,
+        rgba(255,255,255,0.24) 0%, rgba(255,255,255,0.08) 50%, rgba(0,0,0,0.03) 100%);
+    border-top: 1px solid rgba(255,255,255,0.80);
+    border-left: 1px solid rgba(255,255,255,0.48);
+    border-right: 1px solid rgba(255,255,255,0.12);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    box-shadow:
+      0 4px 14px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.07),
+      inset 0 1px 0 rgba(255,255,255,0.70), inset 1px 0 0 rgba(255,255,255,0.38),
+      inset 0 -1px 0 rgba(0,0,0,0.06);
+    transition: background 0.45s, border-color 0.45s, color 0.45s, box-shadow 0.45s;
+  }
+  .tl-step.visible .tl-dot {
+    color: var(--ink);
+    border-top-color: rgba(212,175,55,0.88);
+    border-left-color: rgba(212,175,55,0.52);
+    background:
+      radial-gradient(ellipse 72% 58% at 28% 22%,
+        rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.22) 42%, transparent 60%) no-repeat,
+      radial-gradient(ellipse 65% 50% at 88% 8%,
+        rgba(212,175,55,0.55) 0%, rgba(212,175,55,0.10) 45%, transparent 62%) no-repeat,
+      linear-gradient(155deg,
+        rgba(212,175,55,0.22) 0%, rgba(212,175,55,0.08) 50%, rgba(0,0,0,0.02) 100%);
+    box-shadow:
+      0 4px 16px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.07),
+      inset 0 1px 0 rgba(212,175,55,0.72), inset 1px 0 0 rgba(212,175,55,0.40),
+      0 0 0 1px rgba(212,175,55,0.32), 0 0 20px rgba(212,175,55,0.30);
+  }
+  .tl-sub { font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 8px; }
+  .tl-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 10px; letter-spacing: -0.01em; line-height: 1.3; }
+  .tl-desc { font-size: 12px; color: var(--ink-3); line-height: 1.75; }
+  .tl-items { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+  .tl-item {
+    display: flex; gap: 8px; font-size: 11px; color: var(--ink-2); line-height: 1.5; align-items: flex-start;
+  }
+  .tl-item::before { content:''; width:3px; height:3px; border-radius:50%; background:var(--neon); flex-shrink:0; margin-top:5px; }
+
+  /* ── Dark pitch ── */
+  .pitch {
+    background: var(--ink); padding: 96px 80px;
+    position: relative; overflow: hidden;
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .pitch.visible { opacity:1; transform:translateY(0); }
+  .pitch-grid {
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(212,175,55,0.028) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,175,55,0.028) 1px, transparent 1px);
+    background-size:48px 48px; pointer-events:none;
+  }
+  .pitch-glow {
+    position:absolute; bottom:-20%; left:-10%;
+    width:500px; height:500px;
+    background: radial-gradient(circle, rgba(212,175,55,0.055) 0%, transparent 65%);
+    pointer-events:none;
+  }
+  .pitch-inner {
+    position:relative; z-index:2;
+    max-width:1000px; margin:0 auto;
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:80px; align-items:start;
+  }
+  .pitch-kicker {
+    font-size:9px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase;
+    color:var(--neon); margin-bottom:16px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .pitch-kicker::before { content:''; width:16px; height:1px; background:var(--neon); }
+  .pitch h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight:800; letter-spacing:-0.04em; line-height:1.05;
+    color:#fff; margin-bottom:20px;
+  }
+  .pitch h2 em { font-style:normal; color:var(--neon); text-shadow: 0 0 30px rgba(212,175,55,0.35); }
+  .pitch-body { font-size:14px; color:rgba(255,255,255,0.4); line-height:1.85; margin-bottom:36px; }
+  .plan-steps { display:flex; flex-direction:column; }
+  .plan-step {
+    display:flex; gap:18px; padding:22px 24px;
+    background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-bottom:none;
+    transition:background 0.2s, border-color 0.2s;
+  }
+  .plan-step:last-child { border-bottom:1px solid rgba(255,255,255,0.07); }
+  .plan-step:hover { background:rgba(212,175,55,0.04); border-color:rgba(212,175,55,0.18); }
+  /* ── plan-num — Dark glass pill (pitch section) ── */
+  .plan-num {
+    width: 32px; height: 32px;
+    font-size: 11px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 8px; flex-shrink: 0; margin-top: 1px;
+    color: var(--neon);
+    position: relative; overflow: hidden; isolation: isolate;
+    cursor: default;
+    backdrop-filter: blur(12px) saturate(200%) brightness(1.38) contrast(1.04);
+    -webkit-backdrop-filter: blur(12px) saturate(200%) brightness(1.38) contrast(1.04);
+    background:
+      radial-gradient(ellipse 68% 54% at 28% 22%,
+        rgba(255,255,255,0.48) 0%, rgba(255,255,255,0.06) 40%, transparent 58%) no-repeat,
+      radial-gradient(ellipse 68% 52% at 88% 8%,
+        rgba(212,175,55,0.30) 0%, rgba(212,175,55,0.05) 45%, transparent 62%) no-repeat,
+      linear-gradient(155deg,
+        rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.05) 50%, rgba(0,0,0,0.05) 100%);
+    border-top: 1px solid rgba(255,255,255,0.50);
+    border-left: 1px solid rgba(255,255,255,0.28);
+    border-right: 1px solid rgba(255,255,255,0.07);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    box-shadow:
+      0 4px 16px rgba(0,0,0,0.32), 0 1px 4px rgba(0,0,0,0.18),
+      inset 0 1px 0 rgba(255,255,255,0.44), inset 1px 0 0 rgba(255,255,255,0.22),
+      0 0 0 0.5px rgba(255,255,255,0.12), 0 0 18px rgba(212,175,55,0.14);
+    transition: background 0.35s, border-color 0.35s, box-shadow 0.35s;
+  }
+  .plan-step:hover .plan-num {
+    border-top-color: rgba(212,175,55,0.85);
+    border-left-color: rgba(212,175,55,0.48);
+    background:
+      radial-gradient(ellipse 68% 54% at 28% 22%,
+        rgba(255,255,255,0.60) 0%, rgba(255,255,255,0.08) 40%, transparent 58%) no-repeat,
+      radial-gradient(ellipse 68% 52% at 88% 8%,
+        rgba(212,175,55,0.55) 0%, rgba(212,175,55,0.10) 45%, transparent 62%) no-repeat,
+      linear-gradient(155deg,
+        rgba(212,175,55,0.22) 0%, rgba(212,175,55,0.08) 50%, rgba(0,0,0,0.04) 100%);
+    box-shadow:
+      0 6px 20px rgba(0,0,0,0.30), 0 2px 6px rgba(0,0,0,0.16),
+      inset 0 1px 0 rgba(212,175,55,0.68), inset 1px 0 0 rgba(212,175,55,0.38),
+      0 0 0 1px rgba(212,175,55,0.35), 0 0 28px rgba(212,175,55,0.32);
+  }
+  .plan-title { font-size:13px; font-weight:700; color:#fff; margin-bottom:3px; }
+  .plan-desc { font-size:12px; color:rgba(255,255,255,0.35); line-height:1.6; }
+  .manifesto {
+    padding:40px 44px; margin-top:1px;
+    background:rgba(212,175,55,0.05); border:1px solid var(--neon-border);
+  }
+  .manifesto-label { font-size:9px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--neon); margin-bottom:14px; }
+  .manifesto-text { font-size:18px; font-weight:700; color:#fff; line-height:1.55; letter-spacing:-0.01em; }
+  .manifesto-text em { font-style:normal; color:var(--neon); }
+
+  /* ── Footer ── */
+  footer {
+    background:var(--ink); padding:64px 80px 40px;
+    border-top:1px solid rgba(255,255,255,0.06);
+  }
+  .footer-inner {
+    max-width:1000px; margin:0 auto;
+    display:grid; grid-template-columns:1fr 1fr 1fr; gap:48px;
+    padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .footer-brand { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  .footer-tagline { font-size:12px; color:rgba(255,255,255,0.28); line-height:1.7; max-width:240px; }
+  .footer-col-title {
+    font-size:9px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase;
+    color:rgba(255,255,255,0.28); margin-bottom:18px;
+  }
+  .footer-contact-item {
+    display:flex; align-items:flex-start; gap:10px; margin-bottom:14px;
+  }
+  .footer-contact-icon {
+    width:28px; height:28px; border-radius:6px;
+    background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+    display:flex; align-items:center; justify-content:center;
+    color:rgba(255,255,255,0.35); flex-shrink:0;
+  }
+  .footer-contact-label { font-size:9px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.2); margin-bottom:2px; }
+  .footer-contact-value { font-size:12px; font-weight:500; color:rgba(255,255,255,0.7); }
+  .footer-contact-value a { color:inherit; text-decoration:none; transition:color .2s; }
+  .footer-contact-value a:hover { color:var(--neon); }
+  .footer-social { display:flex; gap:8px; margin-top:4px; }
+  .footer-social-btn {
+    width:32px; height:32px; border-radius:6px;
+    background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+    display:flex; align-items:center; justify-content:center;
+    color:rgba(255,255,255,0.35); text-decoration:none;
+    transition:background .2s, border-color .2s, color .2s;
+  }
+  .footer-social-btn:hover { background:rgba(212,175,55,0.08); border-color:rgba(212,175,55,0.2); color:var(--neon); }
+  .footer-bottom {
+    max-width:1000px; margin:24px auto 0;
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  }
+  .footer-copy { font-size:11px; color:rgba(255,255,255,0.15); letter-spacing:0.04em; }
+
+  /* ─────── MOBILE ─────── */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .nav-mobile-cta { display: flex !important; }
+
+    .hero { padding: 96px 24px 56px; min-height: 100svh; }
+    .marquee-strip { height: 36px; }
+    .marquee-item { font-size: 8px; padding: 0 14px; }
+    .marquee-track { animation-duration: 20s; }
+    .hero-glow { width:280px; height:280px; right:-15%; top:5%; }
+    .hero h1 { font-size: clamp(36px, 10vw, 52px); }
+    .hero-sub { font-size: 15px; max-width: 100%; }
+    .hero-actions { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .btn-primary { width: 100%; justify-content: center; padding: 16px 24px; }
+    .hero-strip { grid-template-columns: repeat(2, 1fr); margin-top: 44px; }
+    .hero-stat { padding: 18px 14px; }
+    .stat-val { font-size: 20px; }
+
+    .section { padding: 64px 24px; }
+    .section-dark { padding: 64px 24px; }
+    .section-title { font-size: clamp(26px, 8vw, 36px); }
+    .section-lead { font-size: 14px; margin-bottom: 36px; }
+
+    /* method-steps: vertical timeline on mobile */
+    .method-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 40px;
+      padding-left: 20px;
+      border-left: 1px solid var(--border-2);
+      position: relative;
+    }
+    .method-connector { display: none; }
+    .method-step {
+      padding: 0 0 36px 28px;
+      position: relative;
+    }
+    .method-step::before {
+      content: '' !important;
+      position: absolute;
+      left: -5px; top: 18px;
+      transform: none !important;
+      font-size: 0 !important;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border-2);
+      background: var(--bg);
+      text-shadow: none !important;
+      transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
+      z-index: 1;
+    }
+    .method-step.visible::before {
+      background: var(--neon);
+      border-color: var(--neon);
+      box-shadow: 0 0 8px rgba(212,175,55,0.6);
+    }
+    .method-steps::after {
+      content: '';
+      position: absolute;
+      left: -1px; top: 0;
+      width: 1px; height: 0;
+      background: linear-gradient(to bottom, var(--neon), rgba(212,175,55,0.2));
+      box-shadow: 0 0 6px var(--neon);
+      transition: height 1.4s ease;
+    }
+    .method-steps.all-visible::after { height: 100%; }
+    .method-step-icon { width: 52px; height: 52px; border-radius: 12px; }
+    .method-step-icon::before { display: none; }
+    .method-step-label { font-size: 18px; }
+
+    .spec-grid { grid-template-columns: 1fr 1fr; }
+    .spec-card { padding: 28px 24px; }
+
+    .sol-grid { grid-template-columns: 1fr; gap: 10px; }
+    .sol-card:nth-child(1),
+    .sol-card:nth-child(2),
+    .sol-card:nth-child(3),
+    .sol-card:nth-child(4) { grid-column: 1 / -1; padding: 28px 24px; }
+    .sol-card::after { font-size: 64px; right: 12px; bottom: -10px; }
+    .sol-featured { padding: 32px 24px; grid-column: 1 / -1; }
+    .sol-featured-inner { grid-template-columns: 1fr; gap: 28px; }
+
+    .timeline { grid-template-columns: 1fr; }
+    .timeline::before, .timeline::after { display: none; }
+    .tl-step { padding: 20px 24px; background: var(--bg-card); border-bottom: 1px solid var(--border); }
+    .tl-dot { width: 24px; height: 24px; margin-bottom: 16px; }
+
+    .pitch { padding: 64px 24px; }
+    .pitch-inner { grid-template-columns: 1fr; gap: 40px; }
+    .pitch h2 { font-size: clamp(26px, 8vw, 36px); }
+    .manifesto { padding: 28px 24px; }
+    .manifesto-text { font-size: 16px; }
+    footer { padding: 48px 24px 32px; }
+    .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 480px) {
+    .hero-strip { grid-template-columns: 1fr 1fr; }
+  }
 </style>
 </head>
 <body>
 
-<!-- COVER -->
-<section class="cover">
-  <div class="cover-label">Prévia de Identidade Visual · 2026</div>
-  <h1 class="cover-title">Três marcas.<br>Uma escolha.</h1>
-  <p class="cover-subtitle">Cada nome carrega um universo simbólico diferente — Tarô, alquimia, mitologia. Todos têm domínio livre e propósito claro no segmento de automação inteligente.</p>
-  <div class="cover-names">
-    <span class="cn cn-agom">AGOM</span>
-    <div class="cover-dot"></div>
-    <span class="cn cn-mondo">MONDO</span>
-    <div class="cover-dot"></div>
-    <span class="cn cn-orobo">OROBO</span>
+<div id="progress"></div>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-brand">
+    <svg class="nav-af" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="24" cy="24" r="17" stroke="#d4af37" stroke-width="2.5" fill="none"/>
+      <circle cx="24" cy="24" r="3.5" fill="#d4af37"/>
+    </svg>
+    <span class="nav-wordmark">Mondo</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#diferenca">inteligência</a></li>
+    <li><a href="#solucoes">soluções</a></li>
+    <li><a href="#processo">processo</a></li>
+    <li><a href="https://wa.me/5511998203701?text=Oi%2C%20gostaria%20de%20conhecer%20melhor%20a%20automatik%20fab" target="_blank" class="nav-cta"><span class="nav-dot"></span>falar com a equipe</a></li>
+  </ul>
+  <a href="https://wa.me/5511998203701?text=Oi%2C%20gostaria%20de%20conhecer%20melhor%20a%20automatik%20fab" target="_blank" style="display:none" class="nav-mobile-cta nav-cta">
+    <span class="nav-dot"></span>contato
+  </a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-scan"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-vignette"></div>
+  <div class="particle-field" id="hero-particles"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">automação inteligente · IA aplicada · resultados mensuráveis</div>
+    <h1>
+      Automações<br>
+      inteligentes que<br>
+      <em>geram resultado.</em>
+    </h1>
+    <p class="hero-sub">
+      Construímos soluções de automação e IA sob medida — integramos sistemas, eliminamos trabalho manual e aceleramos operações comerciais, de marketing e atendimento. Do diagnóstico à execução.
+    </p>
+    <div class="hero-actions">
+      <a href="https://wa.me/5511998203701?text=Oi%2C%20gostaria%20de%20conhecer%20melhor%20a%20automatik%20fab" target="_blank" class="btn-primary">
+        iniciar conversa
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#diferenca" class="btn-ghost">como trabalhamos →</a>
+    </div>
+    <div class="hero-strip">
+      <div class="hero-stat">
+        <div class="stat-label">Abordagem</div>
+        <div class="stat-val neon">Sob medida</div>
+        <div class="stat-desc">Cada solução construída para o contexto específico do cliente</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-label">Especialistas</div>
+        <div class="stat-val">Humanos + IA</div>
+        <div class="stat-desc">Consultores estratégicos com automação inteligente</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-label">Foco</div>
+        <div class="stat-val neon">Resultado</div>
+        <div class="stat-desc">Não vendemos tecnologia — entregamos crescimento estruturado</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-label">Evolução</div>
+        <div class="stat-val">Contínua</div>
+        <div class="stat-desc">Métricas, análises e melhoria constante para máxima eficiência</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<div class="section-divider"></div>
+<!-- Marquee strip — editorial separator hero → seção 01 -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <!-- duplicated for seamless loop -->
+    <span class="marquee-item neon-text">Inteligência Aplicada</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Estratégia que Move</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Tecnologia com Propósito</span><span class="marquee-dot"></span>
+    <span class="marquee-item neon-text">Resultados Reais</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Humanos + IA</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Crescimento Estruturado</span><span class="marquee-dot"></span>
+    <span class="marquee-item neon-text">Mondo</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Operações de Elite</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Inteligência Aplicada</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Estratégia que Move</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Tecnologia com Propósito</span><span class="marquee-dot"></span>
+    <span class="marquee-item neon-text">Resultados Reais</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Humanos + IA</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Crescimento Estruturado</span><span class="marquee-dot"></span>
+    <span class="marquee-item neon-text">Mondo</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Operações de Elite</span><span class="marquee-dot"></span>
+  </div>
+</div>
 
-<!-- ══ AGOM ══ -->
-<section class="brand-section section-agom">
-  <div class="brand-left">
-    <div class="brand-number">01 — O Mago · Arcano I</div>
-    <div class="brand-mark">
-      <!-- Lemniscata SVG -->
-      <svg class="brand-symbol" viewBox="0 0 80 80" fill="none">
-        <path d="M40 40 C40 28 52 22 60 28 C68 34 68 46 60 52 C52 58 28 58 20 52 C12 46 12 34 20 28 C28 22 40 28 40 40 Z" 
-              stroke="#c8ff00" stroke-width="3" fill="none" stroke-linecap="round"/>
-        <circle cx="40" cy="40" r="3" fill="#c8ff00"/>
-      </svg>
-      <div class="brand-name">AGOM</div>
-    </div>
-    <div class="brand-tagline">
-      "Organizamos sistemas.<br>Manifestamos resultados."
-    </div>
-    <div class="brand-archetype">
-      <div class="brand-archetype-label">Arquétipo Simbólico</div>
-      <div class="brand-archetype-name">O Mago — Arcano I</div>
+<!-- 01 — Nossa diferença -->
+<section class="section" id="diferenca">
+  <div class="diferenca-glow2"></div>
+  <div class="section-inner">
+    <div class="section-label">01 — nossa diferença</div>
+    <h2 class="section-title">
+      Tecnologia sem estratégia<br>
+      é custo, não investimento.
+    </h2>
+    <div class="method-steps" id="method-steps">
+      <div class="method-step" data-num="01">
+        <div class="method-step-icon">
+          <span class="glass-border"></span>
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+          </svg>
+        </div>
+        <div class="method-step-num">01</div>
+        <div class="method-step-label">Diagnóstico</div>
+        <div class="method-step-line">Mapeamos gargalos reais antes de qualquer proposta.</div>
+      </div>
+      <div class="method-connector"></div>
+      <div class="method-step" data-num="02">
+        <div class="method-step-icon">
+          <span class="glass-border"></span>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div class="method-step-num">02</div>
+        <div class="method-step-label">Arquitetura</div>
+        <div class="method-step-line">Especialistas definem a solução certa para o negócio.</div>
+      </div>
+      <div class="method-connector"></div>
+      <div class="method-step" data-num="03">
+        <div class="method-step-icon">
+          <span class="glass-border"></span>
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 6 14 10 10 4 6 10 2 8"/>
+            <line x1="2" y1="20" x2="22" y2="20"/>
+          </svg>
+        </div>
+        <div class="method-step-num">03</div>
+        <div class="method-step-label">Escala</div>
+        <div class="method-step-line">Tecnologia executa e cresce sem perder precisão.</div>
+      </div>
     </div>
   </div>
+</section>
 
-  <div class="brand-right">
-    <div>
-      <div class="palette-label">Paleta</div>
-      <div class="palette-swatches">
-        <div class="swatch"><div class="swatch-color" style="background:#08071a"></div><div class="swatch-name">#08071a</div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#7c3aed"></div><div class="swatch-name">#7c3aed</div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#c8ff00"></div><div class="swatch-name">#c8ff00</div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#eeeef8"></div><div class="swatch-name">#eeeef8</div></div>
-      </div>
-    </div>
-
-    <div>
-      <div class="palette-label">Personalidade</div>
-      <div class="keywords">
-        <span class="keyword">Iniciador</span>
-        <span class="keyword">Organizador</span>
-        <span class="keyword">Elétrico</span>
-        <span class="keyword">Preciso</span>
-        <span class="keyword">Poderoso</span>
-        <span class="keyword">Manifestador</span>
-      </div>
-    </div>
-
-    <p class="brand-story">
-      Agom é o anagrama de Mago — a primeira carta do Tarô, aquela que sabe usar todas as ferramentas ao mesmo tempo. Uma mão aponta ao céu, outra à terra. O lemniscata (∞) sobre a cabeça: possibilidades infinitas. Para uma empresa de automação, esse é o nome de quem chega, entende o sistema inteiro e põe tudo em movimento.
+<!-- 02 — Soluções -->
+<section class="section" id="solucoes">
+  <div class="section-inner">
+    <div class="section-label">02 — soluções</div>
+    <h2 class="section-title">
+      Sistemas personalizados<br>
+      para cada realidade.
+    </h2>
+    <p class="section-lead">
+      As soluções variam conforme o diagnóstico de cada empresa. Abaixo, as frentes mais comuns — mas o ponto de partida é sempre a sua dor, não um catálogo.
     </p>
 
-    <div class="type-specimen">
-      <div class="type-specimen-label">Tipografia — Inter Black</div>
-      <div class="type-specimen-display">AGOM</div>
-      <div class="type-specimen-body">Automação inteligente · IA aplicada · Resultados mensuráveis</div>
+    <div class="sol-grid">
+
+      <div class="sol-card" data-num="01">
+        <div class="sol-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+          </svg>
+        </div>
+        <div class="tag">SDR Inteligente</div>
+        <div class="sol-title">Prospecção com inteligência comercial</div>
+        <div class="sol-desc">Sistema de prospecção que combina estratégia de outbound com automação inteligente — identificando, qualificando e abordando os perfis certos com a mensagem certa no momento certo.</div>
+        <div class="sol-chips">
+          <span class="chip">ICP & cadências</span>
+          <span class="chip">Qualificação automática</span>
+          <span class="chip">Multicanal</span>
+          <span class="chip">CRM integrado</span>
+        </div>
+      </div>
+
+      <div class="sol-card" data-num="02">
+        <div class="sol-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            <path d="M8 10h8M8 13h5"/>
+          </svg>
+        </div>
+        <div class="tag">Atendimento Inteligente</div>
+        <div class="sol-title">IA treinada no seu negócio</div>
+        <div class="sol-desc">Agente de IA que conhece sua empresa, seus produtos e seus processos — disponível 24h, capaz de resolver, coletar e encaminhar com precisão, sem parecer um atendimento genérico.</div>
+        <div class="sol-chips">
+          <span class="chip">WhatsApp & omnichannel</span>
+          <span class="chip">Escalonamento humano</span>
+          <span class="chip">Dados estruturados</span>
+        </div>
+      </div>
+
+      <div class="sol-card" data-num="03">
+        <div class="sol-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </div>
+        <div class="tag">Portal do Cliente</div>
+        <div class="sol-title">Experiência que diferencia e retém</div>
+        <div class="sol-desc">Ambiente personalizado onde o cliente acompanha projetos, aprova entregas e acessa documentos — criando uma experiência premium que reduz fricção e aumenta percepção de valor.</div>
+        <div class="sol-chips">
+          <span class="chip">Aprovações & feedbacks</span>
+          <span class="chip">Docs & contratos</span>
+          <span class="chip">Identidade personalizada</span>
+        </div>
+      </div>
+
+      <div class="sol-card" data-num="04">
+        <div class="sol-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="8" height="8" rx="1"/><rect x="14" y="2" width="8" height="8" rx="1"/>
+            <rect x="2" y="14" width="8" height="8" rx="1"/>
+            <path d="M18 14v4M14 18h4"/>
+          </svg>
+        </div>
+        <div class="tag">Dashboard & Gestão</div>
+        <div class="sol-title">Visibilidade que gera decisão</div>
+        <div class="sol-desc">Painel que consolida dados de todas as áreas do negócio — vendas, projetos, financeiro, operação — em uma visão única e acionável, atualizada em tempo real.</div>
+        <div class="sol-chips">
+          <span class="chip">KPIs em tempo real</span>
+          <span class="chip">Alertas automáticos</span>
+          <span class="chip">Integrações nativas</span>
+        </div>
+      </div>
+
+      <!-- Featured dark card -->
+      <div class="sol-featured">
+        <div class="section-dark-grid"></div>
+        <div class="sol-featured-inner">
+          <div>
+            <div class="sol-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+            </div>
+            <div class="tag">Automações Personalizadas</div>
+            <div class="sol-title">Cada processo repetitivo é uma oportunidade de inteligência</div>
+            <div class="sol-desc">Se sua equipe faz algo repetitivo com frequência, construímos um sistema que faz melhor — mais rápido, com menos erro, com dados estruturados. Integrado ao que você já usa.</div>
+            <div class="sol-chips" style="margin-top:16px;">
+              <span class="chip">Sem substituir o que funciona</span>
+              <span class="chip">Zero dependência de TI</span>
+            </div>
+          </div>
+          <div class="sol-feat-features">
+            <div class="sol-feat-item">
+              <div class="sol-feat-dot"></div>
+              <div class="sol-feat-text">Geração automática de contratos e propostas comerciais</div>
+            </div>
+            <div class="sol-feat-item">
+              <div class="sol-feat-dot"></div>
+              <div class="sol-feat-text">Onboarding de clientes estruturado e automatizado</div>
+            </div>
+            <div class="sol-feat-item">
+              <div class="sol-feat-dot"></div>
+              <div class="sol-feat-text">Conciliação financeira e emissão de documentos fiscais</div>
+            </div>
+            <div class="sol-feat-item">
+              <div class="sol-feat-dot"></div>
+              <div class="sol-feat-text">Relatórios e alertas automáticos por WhatsApp ou e-mail</div>
+            </div>
+            <div class="sol-feat-item">
+              <div class="sol-feat-dot"></div>
+              <div class="sol-feat-text">Integração entre CRM, ERP, planilhas e APIs externas</div>
+            </div>
+            <div class="sol-feat-item">
+              <div class="sol-feat-dot"></div>
+              <div class="sol-feat-text">Pipelines de dados e integrações sem código</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<div class="section-divider"></div>
+<!-- 03 — Especialistas (DARK) -->
+<section class="section-dark" id="especialistas">
+  <div class="section-dark-grid"></div>
+  <div class="particle-field" id="spec-particles"></div>
+  <div class="section-inner">
+    <div class="section-label">03 — nossos especialistas</div>
+    <h2 class="section-title">
+      A inteligência<br>
+      <em>por trás do sistema.</em>
+    </h2>
+    <div class="spec-grid">
 
-<!-- ══ MONDO ══ -->
-<section class="brand-section section-mondo">
-  <div class="brand-left">
-    <div class="brand-number">02 — O Mundo · Arcano XXI</div>
-    <div class="brand-mark">
-      <!-- Perfect ring SVG -->
-      <svg class="brand-symbol" viewBox="0 0 80 80" fill="none">
-        <circle cx="40" cy="40" r="28" stroke="#d4af37" stroke-width="3"/>
-        <circle cx="40" cy="40" r="18" stroke="#d4af37" stroke-width="1" opacity="0.3"/>
-        <!-- Four corner marks -->
-        <circle cx="40" cy="10" r="2.5" fill="#d4af37" opacity="0.6"/>
-        <circle cx="40" cy="70" r="2.5" fill="#d4af37" opacity="0.6"/>
-        <circle cx="10" cy="40" r="2.5" fill="#d4af37" opacity="0.6"/>
-        <circle cx="70" cy="40" r="2.5" fill="#d4af37" opacity="0.6"/>
-        <circle cx="40" cy="40" r="4" fill="#d4af37"/>
-      </svg>
-      <div class="brand-name">MONDO</div>
-    </div>
-    <div class="brand-tagline">
-      "Automação que completa.<br>Do processo ao mundo."
-    </div>
-    <div class="brand-archetype">
-      <div class="brand-archetype-label">Arquétipo Simbólico</div>
-      <div class="brand-archetype-name">O Mundo — Arcano XXI</div>
+      <div class="spec-card">
+        <div class="spec-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <div class="spec-area">Arquitetura de Receita</div>
+        <div class="spec-tagline">Da prospecção ao fechamento.</div>
+      </div>
+
+      <div class="spec-card">
+        <div class="spec-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <div class="spec-area">Marketing de Crescimento</div>
+        <div class="spec-tagline">Demanda que converte.</div>
+      </div>
+
+      <div class="spec-card">
+        <div class="spec-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/>
+          </svg>
+        </div>
+        <div class="spec-area">Operações & Processos</div>
+        <div class="spec-tagline">Menos fricção, mais entrega.</div>
+      </div>
+
+      <div class="spec-card">
+        <div class="spec-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </div>
+        <div class="spec-area">Experiência do Cliente</div>
+        <div class="spec-tagline">Retenção por design.</div>
+      </div>
+
+      <div class="spec-card">
+        <div class="spec-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+            <path d="M3 5v6c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/>
+            <path d="M3 11v6c0 1.66 4.03 3 9 3s9-1.34 9-3v-6"/>
+          </svg>
+        </div>
+        <div class="spec-area">Dados & Inteligência</div>
+        <div class="spec-tagline">Decisões sem achismo.</div>
+      </div>
+
+      <div class="spec-card">
+        <div class="spec-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </div>
+        <div class="spec-area">Tecnologia Aplicada</div>
+        <div class="spec-tagline">IA a serviço da estratégia.</div>
+      </div>
+
     </div>
   </div>
+</section>
 
-  <div class="brand-right">
-    <div>
-      <div class="palette-label">Paleta</div>
-      <div class="palette-swatches">
-        <div class="swatch"><div class="swatch-color" style="background:#04040a"></div><div class="swatch-name">#04040a</div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#0c0e18"></div><div class="swatch-name">#0c0e18</div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#d4af37"></div><div class="swatch-name">#d4af37</div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#eaeae5"></div><div class="swatch-name">#eaeae5</div></div>
-      </div>
-    </div>
-
-    <div>
-      <div class="palette-label">Personalidade</div>
-      <div class="keywords">
-        <span class="keyword">Completo</span>
-        <span class="keyword">Premium</span>
-        <span class="keyword">Confiável</span>
-        <span class="keyword">Global</span>
-        <span class="keyword">Resultado</span>
-        <span class="keyword">Expansivo</span>
-      </div>
-    </div>
-
-    <p class="brand-story">
-      Mondo é O Mundo — a última carta do Tarô, a dançarina dentro da coroa de louros. Completude, integração, sucesso. Em italiano e latim, mondo = mundo. Em Tupi, mondó = enviar, transmitir. O nome de uma empresa que não começa jornadas: entrega o resultado final. O cliente não quer o processo. Quer o mundo entregue.
+<!-- 04 — Processo -->
+<section class="section" id="processo">
+  <div class="section-inner">
+    <div class="section-label">04 — como trabalhamos</div>
+    <h2 class="section-title">
+      Uma metodologia construída<br>
+      para gerar resultado real.
+    </h2>
+    <p class="section-lead">
+      Cada engajamento começa com profundidade, não com pressa. Construímos sistemas que duram — e que crescem junto com o negócio.
     </p>
 
-    <div class="type-specimen">
-      <div class="type-specimen-label">Tipografia — Inter Black</div>
-      <div class="type-specimen-display">MONDO</div>
-      <div class="type-specimen-body">Automação inteligente · IA aplicada · Resultados mensuráveis</div>
+    <div class="timeline" id="timeline">
+      <div class="tl-step">
+        <div class="tl-dot">01</div>
+        <div class="tl-sub">Diagnose</div>
+        <div class="tl-title">Entendemos o negócio em profundidade</div>
+        <div class="tl-desc">Antes de qualquer proposta, mergulhamos na operação, no modelo de receita, nos processos e nas dores reais. Essa etapa define o que será construído — e com qual prioridade.</div>
+        <div class="tl-items">
+          <div class="tl-item">Mapeamento de processos e gargalos</div>
+          <div class="tl-item">Análise do modelo de receita</div>
+          <div class="tl-item">Escopo com ROI esperado</div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">02</div>
+        <div class="tl-sub">Arquitetura</div>
+        <div class="tl-title">Desenhamos com os especialistas certos</div>
+        <div class="tl-desc">Consultores especializados na área de impacto definem a arquitetura. Só então a equipe técnica entra para implementar com precisão.</div>
+        <div class="tl-items">
+          <div class="tl-item">Especialistas por frente (comercial, mkt, ops)</div>
+          <div class="tl-item">Arquitetura validada antes da construção</div>
+          <div class="tl-item">Escopo fechado, sem surpresas</div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">03</div>
+        <div class="tl-sub">Implementação</div>
+        <div class="tl-title">Construímos, integramos e validamos</div>
+        <div class="tl-desc">A equipe técnica constrói os sistemas integrados à stack existente — sem substituir o que funciona, sem dependência de TI interno. Cada entrega validada antes de ir ao ar.</div>
+        <div class="tl-items">
+          <div class="tl-item">Integração com ferramentas em uso</div>
+          <div class="tl-item">Testes e validações rigorosos</div>
+          <div class="tl-item">Documentação e treinamento incluídos</div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">04</div>
+        <div class="tl-sub">Evolução contínua</div>
+        <div class="tl-title">O sistema cresce com o negócio</div>
+        <div class="tl-desc">Acompanhamos os resultados, identificamos novas oportunidades e evoluímos os sistemas ao longo do tempo. O objetivo é uma parceria de longo prazo — não uma entrega pontual.</div>
+        <div class="tl-items">
+          <div class="tl-item">Monitoramento contínuo de resultados</div>
+          <div class="tl-item">Expansão incremental</div>
+          <div class="tl-item">Suporte estratégico permanente</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- ══ OROBO ══ -->
-<section class="brand-section section-orobo">
-  <div class="brand-left">
-    <div class="brand-number">03 — Ouroboros · A Serpente Alquímica</div>
-    <div class="brand-mark">
-      <!-- Ouroboros SVG -->
-      <svg class="brand-symbol" viewBox="0 0 80 80" fill="none">
-        <!-- Snake body as circle -->
-        <circle cx="40" cy="40" r="27" stroke="#c8a020" stroke-width="4" stroke-dasharray="155 15" stroke-linecap="round"/>
-        <!-- Snake head -->
-        <ellipse cx="40" cy="13" rx="5" ry="7" fill="#c8a020"/>
-        <!-- Eye -->
-        <circle cx="40" cy="10" r="1.5" fill="#060f08"/>
-        <!-- Tail tip -->
-        <path d="M48 13 Q54 16 52 22" stroke="#c8a020" stroke-width="3" stroke-linecap="round"/>
-        <!-- Center alchemical dot -->
-        <circle cx="40" cy="40" r="3" fill="#c8a020" opacity="0.4"/>
-      </svg>
-      <div class="brand-name">OROBO</div>
+<!-- CTA -->
+<div class="pitch" id="contato">
+  <div class="pitch-grid"></div>
+  <div class="pitch-glow"></div>
+  <div class="particle-field" id="pitch-particles"></div>
+  <div class="pitch-inner">
+    <div>
+      <div class="pitch-kicker">para quem é</div>
+      <h2>
+        Para empresas que<br>
+        querem crescer com<br>
+        <em>inteligência.</em>
+      </h2>
+      <p class="pitch-body">
+        Trabalhamos com empresas que entendem que crescimento sustentável exige mais do que esforço — exige sistemas, estratégia e as pessoas certas. Se você quer construir uma operação que escala sem perder qualidade, a Mondo é para você.
+      </p>
+      <a href="https://wa.me/5511998203701?text=Oi%2C%20gostaria%20de%20conhecer%20melhor%20a%20automatik%20fab" target="_blank" class="btn-primary" style="display:inline-flex;">
+        iniciar uma conversa
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
-    <div class="brand-tagline">
-      "Ciclos que transmutam<br>processos em ouro."
-    </div>
-    <div class="brand-archetype">
-      <div class="brand-archetype-label">Arquétipo Simbólico</div>
-      <div class="brand-archetype-name">Ouroboros — O Ciclo Eterno</div>
+    <div>
+      <div class="plan-steps">
+        <div class="plan-step">
+          <div class="plan-num">01</div>
+          <div>
+            <div class="plan-title">Conversa inicial</div>
+            <div class="plan-desc">Entendemos o negócio, os desafios e os objetivos. Sem compromisso, sem pitch de vendas.</div>
+          </div>
+        </div>
+        <div class="plan-step">
+          <div class="plan-num">02</div>
+          <div>
+            <div class="plan-title">Diagnose e proposta</div>
+            <div class="plan-desc">Nossos especialistas mapeiam o contexto e apresentam uma proposta personalizada com escopo, método e resultado esperado.</div>
+          </div>
+        </div>
+        <div class="plan-step">
+          <div class="plan-num">03</div>
+          <div>
+            <div class="plan-title">Construção e parceria</div>
+            <div class="plan-desc">Implementamos, acompanhamos e evoluímos — com os especialistas certos em cada frente do negócio.</div>
+          </div>
+        </div>
+      </div>
+      <div class="manifesto">
+        <div class="manifesto-label">nossa convicção</div>
+        <div class="manifesto-text">
+          Não vendemos automações.<br>
+          Entregamos <em>inteligência aplicada</em> —<br>
+          com as mentes certas<br>
+          e a tecnologia certa.
+        </div>
+      </div>
     </div>
   </div>
+</div>
 
-  <div class="brand-right">
+<!-- Footer -->
+<footer id="contato">
+  <div class="footer-inner">
+    <!-- Brand -->
     <div>
-      <div class="palette-label">Paleta</div>
-      <div class="palette-swatches">
-        <div class="swatch"><div class="swatch-color" style="background:#060f08"></div><div class="swatch-name">#060f08</div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#2d5a35"></div><div class="swatch-name">#2d5a35</div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#c8a020"></div><div class="swatch-name">#c8a020</div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#f5ecd0"></div><div class="swatch-name">#f5ecd0</div></div>
+      <div class="footer-brand">
+        <svg viewBox="0 0 48 48" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="17" stroke="#d4af37" stroke-width="2.5" fill="none"/>
+          <circle cx="24" cy="24" r="3.5" fill="#d4af37"/>
+        </svg>
+        <span style="font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.28);padding-left:12px;border-left:1px solid rgba(255,255,255,0.08);">Mondo</span>
+      </div>
+      <p class="footer-tagline">Inteligência aplicada ao crescimento. Especialistas em estratégia, automação e produto digital.</p>
+    </div>
+
+    <!-- Contato -->
+    <div>
+      <div class="footer-col-title">contato</div>
+      <div class="footer-contact-item">
+        <div class="footer-contact-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6 6l.95-.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div>
+          <div class="footer-contact-label">WhatsApp</div>
+          <div class="footer-contact-value">
+            <a href="https://wa.me/5511998203701?text=Oi%2C%20gostaria%20de%20conhecer%20melhor%20a%20automatik%20fab" target="_blank">+55 11 99820-3701</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-contact-item">
+        <div class="footer-contact-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <div class="footer-contact-label">E-mail</div>
+          <div class="footer-contact-value">
+            <a href="mailto:contato@automatikfab.com.br">contato@automatikfab.com.br</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-contact-item">
+        <div class="footer-contact-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div class="footer-contact-label">Localização</div>
+          <div class="footer-contact-value">São Paulo, SP — Brasil</div>
+        </div>
       </div>
     </div>
 
+    <!-- Links -->
     <div>
-      <div class="palette-label">Personalidade</div>
-      <div class="keywords">
-        <span class="keyword">Cíclico</span>
-        <span class="keyword">Alquímico</span>
-        <span class="keyword">Profundo</span>
-        <span class="keyword">Transformador</span>
-        <span class="keyword">Eterno</span>
-        <span class="keyword">Misterioso</span>
+      <div class="footer-col-title">navegação</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:28px;">
+        <a href="#diferenca" style="font-size:13px;color:rgba(255,255,255,.38);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.38)'">Nossa diferença</a>
+        <a href="#especialistas" style="font-size:13px;color:rgba(255,255,255,.38);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.38)'">Especialistas</a>
+        <a href="#solucoes" style="font-size:13px;color:rgba(255,255,255,.38);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.38)'">Soluções</a>
+        <a href="#processo" style="font-size:13px;color:rgba(255,255,255,.38);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.38)'">Como trabalhamos</a>
+      </div>
+      <div class="footer-col-title">redes</div>
+      <div class="footer-social">
+        <a href="https://wa.me/5511998203701" target="_blank" class="footer-social-btn" title="WhatsApp">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/automatikfab" target="_blank" class="footer-social-btn" title="Instagram">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/automatikfab" target="_blank" class="footer-social-btn" title="LinkedIn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
       </div>
     </div>
-
-    <p class="brand-story">
-      Orobo vem de Ouroboros — a serpente que devora a própria cauda, símbolo da eternidade e do ciclo perfeito. Na alquimia, representa a transformação contínua: o fim alimenta o começo. Dentro do nome vive "ouro" — o objetivo da alquimia e da automação. Uma empresa que não entrega apenas resultados: entrega ciclos que se retroalimentam e melhoram.
-    </p>
-
-    <div class="type-specimen">
-      <div class="type-specimen-label">Tipografia — Inter Black</div>
-      <div class="type-specimen-display">OROBO</div>
-      <div class="type-specimen-body">Automação inteligente · IA aplicada · Resultados mensuráveis</div>
-    </div>
   </div>
-</section>
 
-<div class="section-divider"></div>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <p>AGOM · MONDO · OROBO — Prévia de Branding · automatik fab · 2026</p>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Mondo · Todos os direitos reservados</span>
+    <span class="footer-copy">mondo.com.br</span>
+  </div>
 </footer>
 
+<script>
+  /* ── Progress bar ── */
+  window.addEventListener('scroll', () => {
+    const d = document.documentElement;
+    document.getElementById('progress').style.width =
+      (d.scrollTop / (d.scrollHeight - d.clientHeight) * 100) + '%';
+  }, { passive: true });
+
+  /* ── IntersectionObserver: sections + timeline ── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.06 });
+
+  document.querySelectorAll('.section, .section-dark, .pitch').forEach(el => io.observe(el));
+
+  /* Timeline steps staggered */
+  const tlObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const steps = e.target.querySelectorAll('.tl-step');
+        steps.forEach((s, i) => {
+          setTimeout(() => s.classList.add('visible'), i * 180);
+        });
+        tlObs.unobserve(e.target);
+        /* animate the timeline line */
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  const tl = document.getElementById('timeline');
+  if (tl) tlObs.observe(tl);
+
+  /* ── Stagger cards entrance ── */
+  function staggerCards(selector) {
+    const cardObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const cards = e.target.querySelectorAll(selector);
+          cards.forEach((c, i) => {
+            c.style.opacity = '0';
+            c.style.transform = 'translateY(20px)';
+            c.style.transition = `opacity 0.5s ease ${i * 0.1}s, transform 0.5s ease ${i * 0.1}s, background 0.25s, box-shadow 0.25s`;
+            setTimeout(() => {
+              c.style.opacity = '1';
+              c.style.transform = 'translateY(0)';
+            }, 80 + i * 100);
+          });
+          cardObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    return cardObs;
+  }
+
+  /* ── Method steps: build stream connectors ── */
+  function buildConnector(c, baseDelay) {
+    /* neon fill line */
+    const fill = document.createElement('span');
+    fill.className = 'conn-fill';
+    c.appendChild(fill);
+    /* 3 stream dots with stagger — leading dot largest */
+    [[6, 1.0, 0], [4.5, 0.7, 0.9], [3, 0.4, 1.8]].forEach(([sz, op, d]) => {
+      const dot = document.createElement('span');
+      dot.className = 'stream-dot';
+      dot.style.setProperty('--sz', sz + 'px');
+      dot.style.setProperty('--sop', op);
+      dot.style.setProperty('--dur', '2.5s');
+      dot.style.setProperty('--d', (baseDelay + d) + 's');
+      c.appendChild(dot);
+    });
+  }
+
+  /* ── Method steps entrance + interaction ── */
+  const methodObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const steps = e.target.querySelectorAll('.method-step');
+        const conns = e.target.querySelectorAll('.method-connector');
+        steps.forEach((s, i) => setTimeout(() => s.classList.add('visible'), i * 230));
+        conns.forEach((c, i) => {
+          buildConnector(c, i * 1.25);
+          setTimeout(() => c.classList.add('drawn'), 300 + i * 230);
+        });
+        /* vertical timeline fill on mobile */
+        setTimeout(() => e.target.classList.add('all-visible'), (steps.length - 1) * 230 + 350);
+        methodObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  const ms = document.getElementById('method-steps');
+  if (ms) {
+    methodObs.observe(ms);
+    const mSteps = ms.querySelectorAll('.method-step');
+    const mConns = ms.querySelectorAll('.method-connector');
+    mSteps.forEach((step, i) => {
+      step.addEventListener('mouseenter', () => {
+        ms.classList.add('has-hover');
+        mSteps.forEach(s => s.classList.remove('step-active'));
+        mConns.forEach(c => c.classList.remove('conn-active'));
+        step.classList.add('step-active');
+        if (i > 0) mConns[i - 1]?.classList.add('conn-active');
+        mConns[i]?.classList.add('conn-active');
+      });
+      step.addEventListener('mouseleave', () => {
+        ms.classList.remove('has-hover');
+        mSteps.forEach(s => s.classList.remove('step-active'));
+        mConns.forEach(c => c.classList.remove('conn-active'));
+      });
+    });
+  }
+
+  const specGrid = document.querySelector('.spec-grid');
+  const solGrid  = document.querySelector('.sol-grid');
+  if (specGrid) {
+    staggerCards('.spec-card').observe(specGrid);
+    /* group dimming */
+    const specCards = specGrid.querySelectorAll('.spec-card');
+    specCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        specGrid.classList.add('has-hover');
+        specCards.forEach(c => c.classList.remove('spec-active'));
+        card.classList.add('spec-active');
+      });
+      card.addEventListener('mouseleave', () => {
+        specGrid.classList.remove('has-hover');
+        specCards.forEach(c => c.classList.remove('spec-active'));
+      });
+    });
+  }
+  if (solGrid)  staggerCards('.sol-card, .sol-featured').observe(solGrid);
+
+  /* ── 3D tilt on cards ── */
+  function addTilt(selector, intensity) {
+    document.querySelectorAll(selector).forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left - r.width  / 2) / r.width;
+        const y = (e.clientY - r.top  - r.height / 2) / r.height;
+        card.style.transform = `perspective(600px) rotateY(${x * intensity}deg) rotateX(${-y * intensity}deg) translateZ(4px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  }
+  addTilt('.spec-card', 4);
+  addTilt('.sol-card',  4);
+
+  /* ── Floating particles ── */
+  function spawnParticles(containerId, count) {
+    const field = document.getElementById(containerId);
+    if (!field) return;
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const left = Math.random() * 100;
+      const dur  = 8 + Math.random() * 14;
+      const del  = Math.random() * 12;
+      const size = Math.random() < 0.3 ? 3 : 2;
+      p.style.cssText = `
+        left:${left}%;
+        --dur:${dur}s; --del:-${del}s;
+        width:${size}px; height:${size}px;
+        opacity: 0;
+      `;
+      field.appendChild(p);
+    }
+  }
+  spawnParticles('hero-particles', 22);
+  spawnParticles('spec-particles', 18);
+  spawnParticles('pitch-particles', 14);
+
+  /* ── Glass icons — dynamic specular + elastic proximity ── */
+  function initLiquidGlass() {
+
+    /* Dynamic specular border for method-step-icon (has glass-border span) */
+    document.querySelectorAll('.method-step-icon').forEach(icon => {
+      const border = icon.querySelector('.glass-border');
+      if (!border) return;
+
+      icon.addEventListener('mousemove', e => {
+        const rect = icon.getBoundingClientRect();
+        const mx = ((e.clientX - rect.left - rect.width  / 2) / rect.width)  * 100;
+        const my = ((e.clientY - rect.top  - rect.height / 2) / rect.height) * 100;
+        const angle = 145 + mx * 1.1;
+        const lo = (0.35 + Math.abs(mx) * 0.009).toFixed(3);
+        const hi = (0.75 + Math.abs(mx) * 0.012).toFixed(3);
+        const p1 = Math.max(10, 33 + my * 0.3).toFixed(0);
+        const p2 = Math.min(90, 66 + my * 0.4).toFixed(0);
+        border.style.background = `linear-gradient(${angle}deg,
+          rgba(255,255,255,0) 0%,
+          rgba(255,255,255,${lo}) ${p1}%,
+          rgba(255,255,255,${hi}) ${p2}%,
+          rgba(255,255,255,0) 100%)`;
+      });
+
+      icon.addEventListener('mouseleave', () => {
+        border.style.background = '';
+      });
+    });
+
+    /* Proximity elastic attraction — all glass icons pull toward cursor */
+    const allGlassSelectors = '.method-step-icon, .spec-icon, .sol-icon, .tl-dot, .plan-num';
+    const skipParentSelectors = ['.method-step', '.spec-card', '.sol-card', '.tl-step', '.plan-step'];
+
+    let rafPending = false;
+    document.addEventListener('mousemove', e => {
+      if (rafPending) return;
+      rafPending = true;
+      requestAnimationFrame(() => {
+        rafPending = false;
+        document.querySelectorAll(allGlassSelectors).forEach(icon => {
+          /* skip if parent is being hovered — CSS handles hover transform */
+          const isHovered = skipParentSelectors.some(sel => icon.closest(sel)?.matches(':hover'));
+          if (isHovered) return;
+          const rect = icon.getBoundingClientRect();
+          const cx = rect.left + rect.width  / 2;
+          const cy = rect.top  + rect.height / 2;
+          const dx = e.clientX - cx;
+          const dy = e.clientY - cy;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          const zone = 120;
+          if (dist < zone) {
+            const f = (1 - dist / zone) * 0.08;
+            icon.style.transform = `translate(${(dx*f).toFixed(2)}px,${(dy*f).toFixed(2)}px)`;
+          } else {
+            icon.style.transform = '';
+          }
+        });
+      });
+    });
+  }
+
+  initLiquidGlass();
+</script>
 </body>
 </html>
