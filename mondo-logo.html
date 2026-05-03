@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mondo — Logo System</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: #04040a; color: white; }
+
+.page { max-width: 1100px; margin: 0 auto; padding: 80px 40px; }
+
+.cover {
+  text-align: center;
+  padding: 80px 0 100px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 80px;
+}
+.cover-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.25em;
+  text-transform: uppercase; color: rgba(255,255,255,0.25);
+  margin-bottom: 48px;
+}
+.cover-logo {
+  display: flex; flex-direction: column; align-items: center; gap: 28px;
+}
+.cover-logo svg { width: 120px; height: 120px; filter: drop-shadow(0 0 24px rgba(255,230,0,0.6)) drop-shadow(0 0 60px rgba(255,230,0,0.25)); }
+.cover-wordmark {
+  font-size: 64px; font-weight: 900; letter-spacing: 0.12em;
+  color: #ffe600;
+  filter: drop-shadow(0 0 12px rgba(255,230,0,0.5));
+}
+
+.section { margin-bottom: 80px; }
+.section-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.25em;
+  text-transform: uppercase; color: rgba(255,255,255,0.22);
+  margin-bottom: 32px; padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ─── LOCKUPS ─── */
+.lockups { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+.lockup-cell {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 48px 24px; gap: 16px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.lockup-cell.dark { background: #04040a; }
+.lockup-cell.mid { background: #0c0e18; }
+.lockup-cell.light { background: #eaeae5; }
+.lockup-name {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.15em;
+  text-transform: uppercase; color: rgba(255,255,255,0.2);
+  margin-top: 8px;
+}
+.lockup-cell.light .lockup-name { color: rgba(0,0,0,0.25); }
+
+/* Horizontal lockup */
+.lockup-h { display: flex; align-items: center; gap: 18px; }
+.lockup-h .wm { font-size: 22px; font-weight: 900; letter-spacing: 0.14em; color: #ffe600; }
+.lockup-h .wm.dark-wm { color: #1c1917; }
+
+/* Vertical lockup */
+.lockup-v { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.lockup-v .wm { font-size: 18px; font-weight: 900; letter-spacing: 0.16em; color: #ffe600; }
+.lockup-v .wm.dark-wm { color: #1c1917; }
+
+/* ─── SIZES ─── */
+.sizes {
+  display: flex; align-items: flex-end; gap: 40px; flex-wrap: wrap;
+  padding: 40px; background: #0a0a12; border-radius: 16px;
+}
+.size-item { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.size-label {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.25);
+}
+
+/* ─── PALETTE ─── */
+.palette { display: flex; gap: 12px; flex-wrap: wrap; }
+.swatch {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.sw { height: 64px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); }
+.sw-label { font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.35); }
+
+/* ─── ANATOMY ─── */
+.anatomy {
+  display: flex; gap: 60px; align-items: center; flex-wrap: wrap;
+  padding: 48px; background: #0a0a12; border-radius: 16px;
+}
+.anatomy-svg { flex-shrink: 0; }
+.anatomy-notes { display: flex; flex-direction: column; gap: 20px; }
+.note { display: flex; gap: 12px; align-items: flex-start; }
+.note-dot { width: 8px; height: 8px; border-radius: 50%; background: #ffe600; flex-shrink: 0; margin-top: 4px; }
+.note-text { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.6); }
+.note-text strong { color: #ffe600; font-weight: 600; }
+
+/* ─── MOCKUPS ─── */
+.mockups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.mockup-card {
+  background: #0c0e18;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 32px 24px; border-radius: 0;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.mockup-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(255,255,255,0.2);
+}
+
+/* App icon mockup */
+.app-icon-wrap {
+  width: 90px; height: 90px; border-radius: 22px;
+  background: #04040a;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(255,230,0,0.15);
+}
+
+/* Nav mockup */
+.nav-mock {
+  background: rgba(10,10,20,0.95);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 12px 20px;
+  display: flex; align-items: center; gap: 12px;
+  border-radius: 8px;
+}
+.nav-mock-wm { font-size: 12px; font-weight: 800; letter-spacing: 0.12em; color: #ffe600; }
+
+/* Business card mockup */
+.bcard {
+  background: #04040a;
+  border: 1px solid rgba(255,230,0,0.12);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.bcard-top { display: flex; align-items: center; gap: 10px; }
+.bcard-wm { font-size: 14px; font-weight: 900; letter-spacing: 0.12em; color: #ffe600; }
+.bcard-info { font-size: 9px; color: rgba(255,255,255,0.3); line-height: 1.8; }
+.bcard-url { font-size: 9px; color: rgba(255,230,0,0.5); }
+
+/* ─── SVG MARK — the actual logo ─── */
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-label">Sistema de Identidade Visual · Mondo · 2026</div>
+    <div class="cover-logo">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer ring -->
+        <circle cx="50" cy="50" r="38" stroke="#ffe600" stroke-width="7" fill="none"/>
+        <!-- Cardinal dots -->
+        <circle cx="50" cy="7"  r="4.5" fill="#ffe600"/>
+        <circle cx="50" cy="93" r="4.5" fill="#ffe600"/>
+        <circle cx="7"  cy="50" r="4.5" fill="#ffe600"/>
+        <circle cx="93" cy="50" r="4.5" fill="#ffe600"/>
+        <!-- Center dot -->
+        <circle cx="50" cy="50" r="5.5" fill="#ffe600"/>
+      </svg>
+      <div class="cover-wordmark">MONDO</div>
+    </div>
+  </div>
+
+  <!-- ANATOMY -->
+  <div class="section">
+    <div class="section-label">Anatomia do Símbolo</div>
+    <div class="anatomy">
+      <div class="anatomy-svg">
+        <svg width="200" height="200" viewBox="0 0 100 100" fill="none">
+          <!-- Ring -->
+          <circle cx="50" cy="50" r="38" stroke="#ffe600" stroke-width="7" fill="none"/>
+          <!-- Cardinals -->
+          <circle cx="50" cy="7"  r="4.5" fill="#ffe600"/>
+          <circle cx="50" cy="93" r="4.5" fill="#ffe600"/>
+          <circle cx="7"  cy="50" r="4.5" fill="#ffe600"/>
+          <circle cx="93" cy="50" r="4.5" fill="#ffe600"/>
+          <!-- Center -->
+          <circle cx="50" cy="50" r="5.5" fill="#ffe600"/>
+          <!-- Guides (faint) -->
+          <line x1="50" y1="0" x2="50" y2="100" stroke="rgba(255,230,0,0.1)" stroke-width="0.5"/>
+          <line x1="0" y1="50" x2="100" y2="50" stroke="rgba(255,230,0,0.1)" stroke-width="0.5"/>
+        </svg>
+      </div>
+      <div class="anatomy-notes">
+        <div class="note">
+          <div class="note-dot"></div>
+          <div class="note-text"><strong>Anel externo</strong> — A coroa de louros d'O Mundo (Arcano XXI). O ciclo completo. Stroke 7/100u.</div>
+        </div>
+        <div class="note">
+          <div class="note-dot"></div>
+          <div class="note-text"><strong>Quatro pontos cardinais</strong> — Os quatro elementos, os quatro evangelistas das bordas do Arcano XXI. Norte · Sul · Leste · Oeste.</div>
+        </div>
+        <div class="note">
+          <div class="note-dot"></div>
+          <div class="note-text"><strong>Ponto central</strong> — A dançarina no centro d'O Mundo. O foco, o resultado, o ponto exato de chegada. Alvo.</div>
+        </div>
+        <div class="note">
+          <div class="note-dot"></div>
+          <div class="note-text"><strong>Espaço negativo interno</strong> — O potencial, o espaço que aguarda ser preenchido pelo trabalho do cliente.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOCKUPS -->
+  <div class="section">
+    <div class="section-label">Lockups — Variações de Uso</div>
+    <div class="lockups">
+
+      <!-- Vertical dark -->
+      <div class="lockup-cell dark">
+        <div class="lockup-v">
+          <svg width="52" height="52" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="38" stroke="#ffe600" stroke-width="7" fill="none"/>
+            <circle cx="50" cy="7"  r="4.5" fill="#ffe600"/>
+            <circle cx="50" cy="93" r="4.5" fill="#ffe600"/>
+            <circle cx="7"  cy="50" r="4.5" fill="#ffe600"/>
+            <circle cx="93" cy="50" r="4.5" fill="#ffe600"/>
+            <circle cx="50" cy="50" r="5.5" fill="#ffe600"/>
+          </svg>
+          <div class="wm">MONDO</div>
+        </div>
+        <div class="lockup-name">Vertical · Dark</div>
+      </div>
+
+      <!-- Horizontal mid -->
+      <div class="lockup-cell mid">
+        <div class="lockup-h">
+          <svg width="36" height="36" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="38" stroke="#ffe600" stroke-width="7" fill="none"/>
+            <circle cx="50" cy="7"  r="4.5" fill="#ffe600"/>
+            <circle cx="50" cy="93" r="4.5" fill="#ffe600"/>
+            <circle cx="7"  cy="50" r="4.5" fill="#ffe600"/>
+            <circle cx="93" cy="50" r="4.5" fill="#ffe600"/>
+            <circle cx="50" cy="50" r="5.5" fill="#ffe600"/>
+          </svg>
+          <div class="wm">MONDO</div>
+        </div>
+        <div class="lockup-name">Horizontal · Dark</div>
+      </div>
+
+      <!-- Icon only -->
+      <div class="lockup-cell dark">
+        <svg width="64" height="64" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="50" r="38" stroke="#ffe600" stroke-width="7" fill="none"/>
+          <circle cx="50" cy="7"  r="4.5" fill="#ffe600"/>
+          <circle cx="50" cy="93" r="4.5" fill="#ffe600"/>
+          <circle cx="7"  cy="50" r="4.5" fill="#ffe600"/>
+          <circle cx="93" cy="50" r="4.5" fill="#ffe600"/>
+          <circle cx="50" cy="50" r="5.5" fill="#ffe600"/>
+        </svg>
+        <div class="lockup-name">Símbolo isolado</div>
+      </div>
+
+      <!-- Light background vertical -->
+      <div class="lockup-cell light">
+        <div class="lockup-v">
+          <svg width="52" height="52" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="38" stroke="#1c1917" stroke-width="7" fill="none"/>
+            <circle cx="50" cy="7"  r="4.5" fill="#1c1917"/>
+            <circle cx="50" cy="93" r="4.5" fill="#1c1917"/>
+            <circle cx="7"  cy="50" r="4.5" fill="#1c1917"/>
+            <circle cx="93" cy="50" r="4.5" fill="#1c1917"/>
+            <circle cx="50" cy="50" r="5.5" fill="#1c1917"/>
+          </svg>
+          <div class="wm dark-wm">MONDO</div>
+        </div>
+        <div class="lockup-name" style="color:rgba(0,0,0,0.25)">Vertical · Light</div>
+      </div>
+
+      <!-- Light horizontal -->
+      <div class="lockup-cell light">
+        <div class="lockup-h">
+          <svg width="36" height="36" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="38" stroke="#1c1917" stroke-width="7" fill="none"/>
+            <circle cx="50" cy="7"  r="4.5" fill="#1c1917"/>
+            <circle cx="50" cy="93" r="4.5" fill="#1c1917"/>
+            <circle cx="7"  cy="50" r="4.5" fill="#1c1917"/>
+            <circle cx="93" cy="50" r="4.5" fill="#1c1917"/>
+            <circle cx="50" cy="50" r="5.5" fill="#1c1917"/>
+          </svg>
+          <div class="wm dark-wm">MONDO</div>
+        </div>
+        <div class="lockup-name" style="color:rgba(0,0,0,0.25)">Horizontal · Light</div>
+      </div>
+
+      <!-- Neon on dark -->
+      <div class="lockup-cell" style="background:#04040a">
+        <div class="lockup-h">
+          <svg width="36" height="36" viewBox="0 0 100 100" fill="none" style="filter:drop-shadow(0 0 8px rgba(255,230,0,0.7))">
+            <circle cx="50" cy="50" r="38" stroke="#ffe600" stroke-width="7" fill="none"/>
+            <circle cx="50" cy="7"  r="4.5" fill="#ffe600"/>
+            <circle cx="50" cy="93" r="4.5" fill="#ffe600"/>
+            <circle cx="7"  cy="50" r="4.5" fill="#ffe600"/>
+            <circle cx="93" cy="50" r="4.5" fill="#ffe600"/>
+            <circle cx="50" cy="50" r="5.5" fill="#ffe600"/>
+          </svg>
+          <div class="wm" style="filter:drop-shadow(0 0 8px rgba(255,230,0,0.6))">MONDO</div>
+        </div>
+        <div class="lockup-name">Com glow neon</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SIZES -->
+  <div class="section">
+    <div class="section-label">Escalabilidade — Teste de Tamanhos</div>
+    <div class="sizes">
+      <div class="size-item">
+        <svg width="16" height="16" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="50" r="38" stroke="#ffe600" stroke-width="9" fill="none"/>
+          <circle cx="50" cy="7"  r="5.5" fill="#ffe600"/>
+          <circle cx="50" cy="93" r="5.5" fill="#ffe600"/>
+          <circle cx="7"  cy="50" r="5.5" fill="#ffe600"/>
+          <circle cx="93" cy="50" r="5.5" fill="#ffe600"/>
+          <circle cx="50" cy="50" r="6.5" fill="#ffe600"/>
+        </svg>
+        <div class="size-label">16px</div>
+      </div>
+      <div class="size-item">
+        <svg width="24" height="24" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="50" r="38" stroke="#ffe600" stroke-width="8" fill="none"/>
+          <circle cx="50" cy="7"  r="5" fill="#ffe600"/>
+          <circle cx="50" cy="93" r="5" fill="#ffe600"/>
+          <circle cx="7"  cy="50" r="5" fill="#ffe600"/>
+          <circle cx="93" cy="50" r="5" fill="#ffe600"/>
+          <circle cx="50" cy="50" r="6" fill="#ffe600"/>
+        </svg>
+        <div class="size-label">24px</div>
+      </div>
+      <div class="size-item">
+        <svg width="32" height="32" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="50" r="38" stroke="#ffe600" stroke-width="7.5" fill="none"/>
+          <circle cx="50" cy="7"  r="4.5" fill="#ffe600"/>
+          <circle cx="50" cy="93" r="4.5" fill="#ffe600"/>
+          <circle cx="7"  cy="50" r="4.5" fill="#ffe600"/>
+          <circle cx="93" cy="50" r="4.5" fill="#ffe600"/>
+          <circle cx="50" cy="50" r="5.5" fill="#ffe600"/>
+        </svg>
+        <div class="size-label">32px</div>
+      </div>
+      <div class="size-item">
+        <svg width="48" height="48" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="50" r="38" stroke="#ffe600" stroke-width="7" fill="none"/>
+          <circle cx="50" cy="7"  r="4.5" fill="#ffe600"/>
+          <circle cx="50" cy="93" r="4.5" fill="#ffe600"/>
+          <circle cx="7"  cy="50" r="4.5" fill="#ffe600"/>
+          <circle cx="93" cy="50" r="4.5" fill="#ffe600"/>
+          <circle cx="50" cy="50" r="5.5" fill="#ffe600"/>
+        </svg>
+        <div class="size-label">48px</div>
+      </div>
+      <div class="size-item">
+        <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="50" r="38" stroke="#ffe600" stroke-width="7" fill="none"/>
+          <circle cx="50" cy="7"  r="4.5" fill="#ffe600"/>
+          <circle cx="50" cy="93" r="4.5" fill="#ffe600"/>
+          <circle cx="7"  cy="50" r="4.5" fill="#ffe600"/>
+          <circle cx="93" cy="50" r="4.5" fill="#ffe600"/>
+          <circle cx="50" cy="50" r="5.5" fill="#ffe600"/>
+        </svg>
+        <div class="size-label">80px</div>
+      </div>
+      <div class="size-item">
+        <svg width="120" height="120" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="50" r="38" stroke="#ffe600" stroke-width="7" fill="none"/>
+          <circle cx="50" cy="7"  r="4.5" fill="#ffe600"/>
+          <circle cx="50" cy="93" r="4.5" fill="#ffe600"/>
+          <circle cx="7"  cy="50" r="4.5" fill="#ffe600"/>
+          <circle cx="93" cy="50" r="4.5" fill="#ffe600"/>
+          <circle cx="50" cy="50" r="5.5" fill="#ffe600"/>
+        </svg>
+        <div class="size-label">120px</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOCKUPS -->
+  <div class="section">
+    <div class="section-label">Aplicações</div>
+    <div class="mockups">
+
+      <!-- App icon -->
+      <div class="mockup-card">
+        <div class="mockup-label">App Icon</div>
+        <div class="app-icon-wrap">
+          <svg width="54" height="54" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="38" stroke="#ffe600" stroke-width="7" fill="none"/>
+            <circle cx="50" cy="7"  r="4.5" fill="#ffe600"/>
+            <circle cx="50" cy="93" r="4.5" fill="#ffe600"/>
+            <circle cx="7"  cy="50" r="4.5" fill="#ffe600"/>
+            <circle cx="93" cy="50" r="4.5" fill="#ffe600"/>
+            <circle cx="50" cy="50" r="5.5" fill="#ffe600"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Nav bar -->
+      <div class="mockup-card">
+        <div class="mockup-label">Barra de Navegação</div>
+        <div class="nav-mock">
+          <svg width="22" height="22" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="38" stroke="#ffe600" stroke-width="7" fill="none"/>
+            <circle cx="50" cy="7"  r="4.5" fill="#ffe600"/>
+            <circle cx="50" cy="93" r="4.5" fill="#ffe600"/>
+            <circle cx="7"  cy="50" r="4.5" fill="#ffe600"/>
+            <circle cx="93" cy="50" r="4.5" fill="#ffe600"/>
+            <circle cx="50" cy="50" r="5.5" fill="#ffe600"/>
+          </svg>
+          <div class="nav-mock-wm">MONDO</div>
+        </div>
+      </div>
+
+      <!-- Business card -->
+      <div class="mockup-card">
+        <div class="mockup-label">Cartão de Visita</div>
+        <div class="bcard">
+          <div class="bcard-top">
+            <svg width="28" height="28" viewBox="0 0 100 100" fill="none">
+              <circle cx="50" cy="50" r="38" stroke="#ffe600" stroke-width="7" fill="none"/>
+              <circle cx="50" cy="7"  r="4.5" fill="#ffe600"/>
+              <circle cx="50" cy="93" r="4.5" fill="#ffe600"/>
+              <circle cx="7"  cy="50" r="4.5" fill="#ffe600"/>
+              <circle cx="93" cy="50" r="4.5" fill="#ffe600"/>
+              <circle cx="50" cy="50" r="5.5" fill="#ffe600"/>
+            </svg>
+            <div class="bcard-wm">MONDO</div>
+          </div>
+          <div class="bcard-info">Pedro Maschio<br>CEO & Fundador</div>
+          <div class="bcard-url">mondo.com.br</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PALETTE -->
+  <div class="section">
+    <div class="section-label">Paleta</div>
+    <div class="palette">
+      <div class="swatch"><div class="sw" style="width:90px;background:#ffe600;border-color:transparent"></div><div class="sw-label">#ffe600 · Neon</div></div>
+      <div class="swatch"><div class="sw" style="width:90px;background:#04040a"></div><div class="sw-label">#04040a · Deep</div></div>
+      <div class="swatch"><div class="sw" style="width:90px;background:#0c0e18"></div><div class="sw-label">#0c0e18 · Mid</div></div>
+      <div class="swatch"><div class="sw" style="width:90px;background:#1c1917"></div><div class="sw-label">#1c1917 · Ink</div></div>
+      <div class="swatch"><div class="sw" style="width:90px;background:#eaeae5"></div><div class="sw-label">#eaeae5 · Stone</div></div>
+    </div>
+  </div>
+
+  <!-- SVG CODE -->
+  <div class="section">
+    <div class="section-label">SVG — Código Oficial</div>
+    <div style="background:#0a0a12;border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:28px;">
+      <pre style="font-size:12px;line-height:1.7;color:rgba(255,255,255,0.55);overflow-x:auto;font-family:monospace">&lt;!-- Mondo Logomark — SVG oficial --&gt;
+&lt;svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"&gt;
+  &lt;circle cx="50" cy="50" r="38" stroke="#ffe600" stroke-width="7" fill="none"/&gt;
+  &lt;circle cx="50" cy="7"  r="4.5" fill="#ffe600"/&gt;
+  &lt;circle cx="50" cy="93" r="4.5" fill="#ffe600"/&gt;
+  &lt;circle cx="7"  cy="50" r="4.5" fill="#ffe600"/&gt;
+  &lt;circle cx="93" cy="50" r="4.5" fill="#ffe600"/&gt;
+  &lt;circle cx="50" cy="50" r="5.5" fill="#ffe600"/&gt;
+&lt;/svg&gt;</pre>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:40px 0;border-top:1px solid rgba(255,255,255,0.06);">
+    <p style="font-size:11px;color:rgba(255,255,255,0.15);letter-spacing:0.1em">MONDO · Sistema de Identidade Visual · 2026</p>
+  </div>
+
+</div>
+</body>
+</html>
