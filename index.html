@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Preview — Agom · Mondo · Orobo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --agom-bg: #08071a;
+  --agom-mid: #110d2e;
+  --agom-lime: #c8ff00;
+  --agom-violet: #7c3aed;
+  --agom-white: #eeeef8;
+
+  --mondo-bg: #04040a;
+  --mondo-mid: #0c0e18;
+  --mondo-gold: #d4af37;
+  --mondo-gold2: #f0d060;
+  --mondo-white: #eaeae5;
+
+  --orobo-bg: #060f08;
+  --orobo-mid: #0d1f10;
+  --orobo-gold: #c8a020;
+  --orobo-amber: #f0c040;
+  --orobo-green: #2d5a35;
+  --orobo-white: #f5ecd0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #02020a;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* ─── COVER ─── */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #02020a;
+  text-align: center;
+  padding: 60px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.cover::before {
+  content:'';
+  position:absolute;
+  width:600px;height:600px;
+  border-radius:50%;
+  background: radial-gradient(circle, rgba(100,60,200,0.12) 0%, transparent 70%);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.cover-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 32px;
+}
+.cover-title {
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: white;
+  margin-bottom: 20px;
+}
+.cover-subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.45);
+  max-width: 480px;
+  line-height: 1.6;
+  margin-bottom: 64px;
+}
+.cover-names {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+}
+.cover-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+}
+.cn {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.cn-agom { color: #c8ff00; }
+.cn-mondo { color: #d4af37; }
+.cn-orobo { color: #c8a020; }
+
+/* ─── SECTION BASE ─── */
+.brand-section {
+  min-height: 100vh;
+  padding: 100px 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+@media (max-width: 900px) {
+  .brand-section { grid-template-columns: 1fr; padding: 60px 24px; }
+}
+.section-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+}
+
+/* ─── LEFT PANEL ─── */
+.brand-left {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  position: relative;
+  z-index: 2;
+}
+.brand-number {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+.brand-mark {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.brand-symbol {
+  width: 80px; height: 80px;
+}
+.brand-name {
+  font-size: clamp(56px, 8vw, 100px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+.brand-tagline {
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-weight: 300;
+  line-height: 1.4;
+  max-width: 480px;
+}
+.brand-archetype {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.brand-archetype-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+.brand-archetype-name {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* ─── RIGHT PANEL ─── */
+.brand-right {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Palette */
+.palette-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 16px;
+}
+.palette-swatches {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.swatch-color {
+  width: 64px; height: 64px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.swatch-name {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+}
+
+/* Keywords */
+.keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.keyword {
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.6);
+}
+
+/* Brand story */
+.brand-story {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.5);
+  max-width: 420px;
+}
+
+/* Typography specimen */
+.type-specimen {
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.type-specimen-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 12px;
+}
+.type-specimen-display {
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.type-specimen-body {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.4);
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+/* ══════════════════════════════════════
+   AGOM
+══════════════════════════════════════ */
+.section-agom {
+  background: var(--agom-bg);
+}
+.section-agom::before {
+  content: '';
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 65%);
+  top: -100px; right: -200px;
+  pointer-events: none;
+}
+.section-agom::after {
+  content: '';
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,255,0,0.08) 0%, transparent 65%);
+  bottom: 0; left: -100px;
+  pointer-events: none;
+}
+.section-agom .brand-name { color: var(--agom-lime); }
+.section-agom .brand-tagline { color: rgba(238,238,248,0.7); }
+.section-agom .brand-archetype-name { color: var(--agom-lime); }
+.section-agom .keyword { border-color: rgba(200,255,0,0.2); color: rgba(200,255,0,0.7); }
+.section-agom .type-specimen { background: rgba(200,255,0,0.04); border-color: rgba(200,255,0,0.12); }
+.section-agom .type-specimen-display { color: var(--agom-lime); }
+
+/* ══════════════════════════════════════
+   MONDO
+══════════════════════════════════════ */
+.section-mondo {
+  background: var(--mondo-bg);
+}
+.section-mondo::before {
+  content: '';
+  position: absolute;
+  width: 800px; height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 65%);
+  top: 50%; right: -300px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.section-mondo .brand-name { color: var(--mondo-gold); }
+.section-mondo .brand-tagline { color: rgba(234,234,229,0.7); }
+.section-mondo .brand-archetype-name { color: var(--mondo-gold); }
+.section-mondo .keyword { border-color: rgba(212,175,55,0.2); color: rgba(212,175,55,0.7); }
+.section-mondo .type-specimen { background: rgba(212,175,55,0.04); border-color: rgba(212,175,55,0.12); }
+.section-mondo .type-specimen-display { color: var(--mondo-gold); }
+
+/* ══════════════════════════════════════
+   OROBO
+══════════════════════════════════════ */
+.section-orobo {
+  background: var(--orobo-bg);
+}
+.section-orobo::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(45,90,53,0.4) 0%, transparent 65%);
+  top: -50px; left: -150px;
+  pointer-events: none;
+}
+.section-orobo::after {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,160,32,0.1) 0%, transparent 65%);
+  bottom: 0; right: -100px;
+  pointer-events: none;
+}
+.section-orobo .brand-name { color: var(--orobo-gold); }
+.section-orobo .brand-tagline { color: rgba(245,236,208,0.7); }
+.section-orobo .brand-archetype-name { color: var(--orobo-gold); }
+.section-orobo .keyword { border-color: rgba(200,160,32,0.2); color: rgba(200,160,32,0.7); }
+.section-orobo .type-specimen { background: rgba(200,160,32,0.04); border-color: rgba(200,160,32,0.12); }
+.section-orobo .type-specimen-display { color: var(--orobo-gold); }
+
+/* ─── FOOTER ─── */
+.footer {
+  background: #02020a;
+  padding: 60px;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.1em;
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-label">Prévia de Identidade Visual · 2026</div>
+  <h1 class="cover-title">Três marcas.<br>Uma escolha.</h1>
+  <p class="cover-subtitle">Cada nome carrega um universo simbólico diferente — Tarô, alquimia, mitologia. Todos têm domínio livre e propósito claro no segmento de automação inteligente.</p>
+  <div class="cover-names">
+    <span class="cn cn-agom">AGOM</span>
+    <div class="cover-dot"></div>
+    <span class="cn cn-mondo">MONDO</span>
+    <div class="cover-dot"></div>
+    <span class="cn cn-orobo">OROBO</span>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══ AGOM ══ -->
+<section class="brand-section section-agom">
+  <div class="brand-left">
+    <div class="brand-number">01 — O Mago · Arcano I</div>
+    <div class="brand-mark">
+      <!-- Lemniscata SVG -->
+      <svg class="brand-symbol" viewBox="0 0 80 80" fill="none">
+        <path d="M40 40 C40 28 52 22 60 28 C68 34 68 46 60 52 C52 58 28 58 20 52 C12 46 12 34 20 28 C28 22 40 28 40 40 Z" 
+              stroke="#c8ff00" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <circle cx="40" cy="40" r="3" fill="#c8ff00"/>
+      </svg>
+      <div class="brand-name">AGOM</div>
+    </div>
+    <div class="brand-tagline">
+      "Organizamos sistemas.<br>Manifestamos resultados."
+    </div>
+    <div class="brand-archetype">
+      <div class="brand-archetype-label">Arquétipo Simbólico</div>
+      <div class="brand-archetype-name">O Mago — Arcano I</div>
+    </div>
+  </div>
+
+  <div class="brand-right">
+    <div>
+      <div class="palette-label">Paleta</div>
+      <div class="palette-swatches">
+        <div class="swatch"><div class="swatch-color" style="background:#08071a"></div><div class="swatch-name">#08071a</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#7c3aed"></div><div class="swatch-name">#7c3aed</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#c8ff00"></div><div class="swatch-name">#c8ff00</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#eeeef8"></div><div class="swatch-name">#eeeef8</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="palette-label">Personalidade</div>
+      <div class="keywords">
+        <span class="keyword">Iniciador</span>
+        <span class="keyword">Organizador</span>
+        <span class="keyword">Elétrico</span>
+        <span class="keyword">Preciso</span>
+        <span class="keyword">Poderoso</span>
+        <span class="keyword">Manifestador</span>
+      </div>
+    </div>
+
+    <p class="brand-story">
+      Agom é o anagrama de Mago — a primeira carta do Tarô, aquela que sabe usar todas as ferramentas ao mesmo tempo. Uma mão aponta ao céu, outra à terra. O lemniscata (∞) sobre a cabeça: possibilidades infinitas. Para uma empresa de automação, esse é o nome de quem chega, entende o sistema inteiro e põe tudo em movimento.
+    </p>
+
+    <div class="type-specimen">
+      <div class="type-specimen-label">Tipografia — Inter Black</div>
+      <div class="type-specimen-display">AGOM</div>
+      <div class="type-specimen-body">Automação inteligente · IA aplicada · Resultados mensuráveis</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══ MONDO ══ -->
+<section class="brand-section section-mondo">
+  <div class="brand-left">
+    <div class="brand-number">02 — O Mundo · Arcano XXI</div>
+    <div class="brand-mark">
+      <!-- Perfect ring SVG -->
+      <svg class="brand-symbol" viewBox="0 0 80 80" fill="none">
+        <circle cx="40" cy="40" r="28" stroke="#d4af37" stroke-width="3"/>
+        <circle cx="40" cy="40" r="18" stroke="#d4af37" stroke-width="1" opacity="0.3"/>
+        <!-- Four corner marks -->
+        <circle cx="40" cy="10" r="2.5" fill="#d4af37" opacity="0.6"/>
+        <circle cx="40" cy="70" r="2.5" fill="#d4af37" opacity="0.6"/>
+        <circle cx="10" cy="40" r="2.5" fill="#d4af37" opacity="0.6"/>
+        <circle cx="70" cy="40" r="2.5" fill="#d4af37" opacity="0.6"/>
+        <circle cx="40" cy="40" r="4" fill="#d4af37"/>
+      </svg>
+      <div class="brand-name">MONDO</div>
+    </div>
+    <div class="brand-tagline">
+      "Automação que completa.<br>Do processo ao mundo."
+    </div>
+    <div class="brand-archetype">
+      <div class="brand-archetype-label">Arquétipo Simbólico</div>
+      <div class="brand-archetype-name">O Mundo — Arcano XXI</div>
+    </div>
+  </div>
+
+  <div class="brand-right">
+    <div>
+      <div class="palette-label">Paleta</div>
+      <div class="palette-swatches">
+        <div class="swatch"><div class="swatch-color" style="background:#04040a"></div><div class="swatch-name">#04040a</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#0c0e18"></div><div class="swatch-name">#0c0e18</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#d4af37"></div><div class="swatch-name">#d4af37</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#eaeae5"></div><div class="swatch-name">#eaeae5</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="palette-label">Personalidade</div>
+      <div class="keywords">
+        <span class="keyword">Completo</span>
+        <span class="keyword">Premium</span>
+        <span class="keyword">Confiável</span>
+        <span class="keyword">Global</span>
+        <span class="keyword">Resultado</span>
+        <span class="keyword">Expansivo</span>
+      </div>
+    </div>
+
+    <p class="brand-story">
+      Mondo é O Mundo — a última carta do Tarô, a dançarina dentro da coroa de louros. Completude, integração, sucesso. Em italiano e latim, mondo = mundo. Em Tupi, mondó = enviar, transmitir. O nome de uma empresa que não começa jornadas: entrega o resultado final. O cliente não quer o processo. Quer o mundo entregue.
+    </p>
+
+    <div class="type-specimen">
+      <div class="type-specimen-label">Tipografia — Inter Black</div>
+      <div class="type-specimen-display">MONDO</div>
+      <div class="type-specimen-body">Automação inteligente · IA aplicada · Resultados mensuráveis</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══ OROBO ══ -->
+<section class="brand-section section-orobo">
+  <div class="brand-left">
+    <div class="brand-number">03 — Ouroboros · A Serpente Alquímica</div>
+    <div class="brand-mark">
+      <!-- Ouroboros SVG -->
+      <svg class="brand-symbol" viewBox="0 0 80 80" fill="none">
+        <!-- Snake body as circle -->
+        <circle cx="40" cy="40" r="27" stroke="#c8a020" stroke-width="4" stroke-dasharray="155 15" stroke-linecap="round"/>
+        <!-- Snake head -->
+        <ellipse cx="40" cy="13" rx="5" ry="7" fill="#c8a020"/>
+        <!-- Eye -->
+        <circle cx="40" cy="10" r="1.5" fill="#060f08"/>
+        <!-- Tail tip -->
+        <path d="M48 13 Q54 16 52 22" stroke="#c8a020" stroke-width="3" stroke-linecap="round"/>
+        <!-- Center alchemical dot -->
+        <circle cx="40" cy="40" r="3" fill="#c8a020" opacity="0.4"/>
+      </svg>
+      <div class="brand-name">OROBO</div>
+    </div>
+    <div class="brand-tagline">
+      "Ciclos que transmutam<br>processos em ouro."
+    </div>
+    <div class="brand-archetype">
+      <div class="brand-archetype-label">Arquétipo Simbólico</div>
+      <div class="brand-archetype-name">Ouroboros — O Ciclo Eterno</div>
+    </div>
+  </div>
+
+  <div class="brand-right">
+    <div>
+      <div class="palette-label">Paleta</div>
+      <div class="palette-swatches">
+        <div class="swatch"><div class="swatch-color" style="background:#060f08"></div><div class="swatch-name">#060f08</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#2d5a35"></div><div class="swatch-name">#2d5a35</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#c8a020"></div><div class="swatch-name">#c8a020</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#f5ecd0"></div><div class="swatch-name">#f5ecd0</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="palette-label">Personalidade</div>
+      <div class="keywords">
+        <span class="keyword">Cíclico</span>
+        <span class="keyword">Alquímico</span>
+        <span class="keyword">Profundo</span>
+        <span class="keyword">Transformador</span>
+        <span class="keyword">Eterno</span>
+        <span class="keyword">Misterioso</span>
+      </div>
+    </div>
+
+    <p class="brand-story">
+      Orobo vem de Ouroboros — a serpente que devora a própria cauda, símbolo da eternidade e do ciclo perfeito. Na alquimia, representa a transformação contínua: o fim alimenta o começo. Dentro do nome vive "ouro" — o objetivo da alquimia e da automação. Uma empresa que não entrega apenas resultados: entrega ciclos que se retroalimentam e melhoram.
+    </p>
+
+    <div class="type-specimen">
+      <div class="type-specimen-label">Tipografia — Inter Black</div>
+      <div class="type-specimen-display">OROBO</div>
+      <div class="type-specimen-body">Automação inteligente · IA aplicada · Resultados mensuráveis</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>AGOM · MONDO · OROBO — Prévia de Branding · automatik fab · 2026</p>
+</footer>
+
+</body>
+</html>
